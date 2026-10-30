@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     print_r($_POST);
     $novoPontoColeta = [
         'cep' => $_POST['cep'],
+        'status' => $_POST['status']
     ];
     $idPonto = create(database(), "PontosDeColeta", $novoPontoColeta);
     foreach($_POST['opcoes'] as $o => $chave){
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Criação de Ponto</title>
 </head>
 
 <body>
@@ -45,6 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <?= $m['tipo'] ?>
             </label>
         <?php endforeach; ?>
+
+        <select name="status" id="">
+            <option value="disponivel">disponível</option>
+            <option value="indisponivel">Indisponível</option>
+        </select>
+       
         <button type="submit">Confirmar</button>
         <button type="reset">Limpar</button>
         <button type="button"><a href="./teste_ponto.php">Cancelar</a></button>

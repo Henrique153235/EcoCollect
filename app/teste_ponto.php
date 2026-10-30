@@ -26,6 +26,7 @@ $pontoColeta = readAll(database(), "ViewPontosDeColeta");
                 <td>CEP</td>
                 <td>Status</td>
                 <td>Materiais</td>
+                <td>Ações</td>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +36,10 @@ $pontoColeta = readAll(database(), "ViewPontosDeColeta");
                 <td> <?= $p['cep'] ?> </td>
                 <td> <?= $p['status'] ?> </td>
                 <td> <?= $p['materiais'] ?> </td>
+                <td>
+                    <a href="edicao_ponto_coleta.php?id=<?= $p['id'] ?>">Editar</a>
+                    <a href="remocao_ponto_coleta.php?id=<?= $p['id'] ?>">Remover</a>
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
