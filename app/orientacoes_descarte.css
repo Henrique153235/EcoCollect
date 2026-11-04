@@ -1,0 +1,70 @@
+/* Configurações gerais da página */
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    --verde-principal: #6B7F3A;
+    --fundo-pagina: #D7D2C7;
+    --branco: #FFFFFF;
+    --cor-texto: #4A3A2A;
+}
+
+body{
+    background-color: var(--fundo-pagina);
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+header {
+        background-color: var(--verde-principal);
+        color: var(--branco);
+        width: 100%;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        padding: 5px;
+
+        .nome-projeto {
+            width: 25%;
+
+            h1 {
+                font-weight: normal;
+            }
+
+            h3 {
+                font-weight: normal;
+            }
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            a {
+                font-size: 20px;
+                width: 20%;
+                text-decoration: none;
+                color: var(--branco);
+                margin-left: 15px;
+            }
+
+            details {
+            position: relative;
+            display: inline-block;
+        }
+
+            summary{
+                font-size: 20px;
+                padding: 5px 10px;
+                cursor: pointer;
+                list-style: none;
+            }
+
+            details[open] a:nth-of-type(1) { top: 100%; }
+            details[open] a:nth-of-type(2) { top: calc(100% + 35px); }
+            details[open] a:nth-of-type(3) { top: calc(100% + 70px); }
+        }
+    }
