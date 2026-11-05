@@ -17,7 +17,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
     foreach ($_POST['opcoes'] as $o => $chave) {
         create(database(), "PontoMaterial", ['idPonto' => $idPonto, 'idMaterial' => $chave]);
     }
-    header("Location: teste_ponto.php");
+    header("Location: visualizacao_ponto.php");
     exit;
 }
 
