@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
        
         <button type="submit">Confirmar</button>
         <button type="reset">Limpar</button>
-        <button type="button"><a href="./teste_ponto.php">Cancelar</a></button>
+        <button type="button"><a href="./visualizacao_ponto.php">Cancelar</a></button>
     </form>
 
 </body>

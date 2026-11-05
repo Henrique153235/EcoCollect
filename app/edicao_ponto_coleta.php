@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['id'])) {
         create(database(), "PontoMaterial", [ 'idPonto' => $_GET['id'], 'idMaterial' => $chave ]);
     }
 
-     header("Location: teste_ponto.php");
+     header("Location: visualizacao_ponto.php");
     exit;
 }else{
     header("Location: teste_ponto.php?erro=nao_selecionado");
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['id'])) {
         </select>
 
         <button type="submit">Confirmar</button>
-        <button type="button"><a href="./teste_ponto.php">Cancelar</a></button>
+        <button type="button"><a href="./visualizacao_ponto.php">Cancelar</a></button>
     </form>
 
 </body>
