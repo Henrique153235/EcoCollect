@@ -54,6 +54,7 @@ $pontoColeta = readAll(database(), "ViewPontosDeColeta");
         <section class="dashboard-container">
             <div class="dashboard-header">
                 <h2 class="box-titulo">Pontos de Coleta Cadastrados</h2>
+                <a href="cadastro_ponto_coleta.php" class="btn-cadastrar">Cadastrar Novo Ponto</a>
             </div>
 
             <div class="grid-cards">
@@ -83,7 +84,6 @@ $pontoColeta = readAll(database(), "ViewPontosDeColeta");
                         </div>
                     </article>
                 <?php endforeach; ?>
-                <a href="cadastro_ponto_coleta.php" class="btn-cadastrar botao-link">Cadastrar Novo Ponto</a>
             </div>
         </section>
 
