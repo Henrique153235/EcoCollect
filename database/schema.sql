@@ -1,9 +1,3 @@
-CREATE TABLE IF NOT EXISTS exemplos (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR(120) NOT NULL,
-    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
 create database EcoCollecteste;
 use EcoCollecteste;
 

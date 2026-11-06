@@ -13,7 +13,7 @@ $pontoColeta = readAll(database(), "ViewPontosDeColeta");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TESTE - PONTOS DE COLETA</title>
+    <title>Pontos de Coleta | EcoCollect</title>
     <link rel="stylesheet" href="visualizacao_ponto.css">
 </head>
 
