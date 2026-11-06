@@ -49,38 +49,6 @@ $pontoColeta = readAll(database(), "ViewPontosDeColeta");
         </nav>
     </header>
 
-    <!-- <main> 
-
-    <table border="1">
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>CEP</td>
-                <td>Status</td>
-                <td>Materiais</td>
-                <td>Ações</td>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($pontoColeta as $p): ?>
-                <tr>
-                    <td> <?= $p['id'] ?> </td>
-                    <td> <?= $p['cep'] ?> </td>
-                    <td> <?= $p['status'] ?> </td>
-                    <td> <?= $p['materiais'] ?> </td>
-                    <td>
-                        <a href="edicao_ponto_coleta.php?id=<?= $p['id'] ?>">Editar</a>
-                        <a href="remocao_ponto_coleta.php?id=<?= $p['id'] ?>">Remover</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-
-    </main> -->
-
-    <!-- TESTE -->
-
     <main>
 
         <section class="dashboard-container">
@@ -115,7 +83,7 @@ $pontoColeta = readAll(database(), "ViewPontosDeColeta");
                         </div>
                     </article>
                 <?php endforeach; ?>
-                <a href="cadastro_ponto_coleta.php" class="btn-cadastrar" class="botao-link">Cadastrar Novo Ponto</a>
+                <a href="cadastro_ponto_coleta.php" class="btn-cadastrar botao-link">Cadastrar Novo Ponto</a>
             </div>
         </section>
 
