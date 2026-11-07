@@ -25,17 +25,65 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 
 <body>
-    <form action="" method="post">
-        <h1>Excluir Ponto de Coleta</h1>
-        <ul>
-            <li>ID: <?= $pontosColeta['id'] ?></li>
-            <li>CEP: <?= $pontosColeta['cep'] ?></h1>
-            <li>Status: <?= $pontosColeta['status'] ?></li>
-            <li>Materiais: <?= $pontosColeta['materiais'] ?></li>
-        </ul>
-        <button type="submit">Confirmar Exclusão</button>
-        <button type="button"><a href="./visualizacao_ponto.php">Cancelar</a></button>
-    </form>
+    <header>
+        <div class="nome-projeto">
+            <h1>EcoCollect</h1>
+            <h3>by Ambientify</h3>
+        </div>
+
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="dashboard.html">Dashboard</a>
+
+            <details name="menu-nav">
+                <summary>Cadastro</summary>
+                <div class="sub-menu">
+                    <a href="">Usuário</a>
+                    <a href="">Ponto de Coleta</a>
+                    <a href="">Campanha</a>
+                </div>
+            </details>
+
+            <details name="menu-nav">
+                <summary>Coletas</summary>
+                <div class="sub-menu menu-direita">
+                    <a href="">Orientações de Descarte</a>
+                    <a href="">Campanhas de Descarte</a>
+                    <a href="">Pontos de Coleta Próximos</a>
+                </div>
+            </details>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="box-titulo">Excluir Ponto de Coleta</h2>
+
+        <p class="mensagem-alerta">Tem certeza que deseja remover este ponto de coleta?</p>
+
+        <form action="" method="post">
+            <ul class="lista-detalhes">
+                <li><strong>ID:</strong> #<?= htmlspecialchars($pontosColeta['id'] ?? '') ?></li>
+                <li>
+                    <?php
+                    $cep = $pontosColeta['cep'] ?? '';
+                    $cep_formatado = (strlen($cep) === 8) ? substr($cep, 0, 5) . '-' . substr($cep, 5) : $cep;
+                    ?>
+                    <strong>CEP:</strong> <?= htmlspecialchars($cep_formatado) ?>
+                </li>
+                <li><strong>Status:</strong> <?= htmlspecialchars($pontosColeta['status'] ?? '') ?></li>
+                <li><strong>Materiais:</strong> <?= htmlspecialchars($pontosColeta['materiais'] ?? '') ?></li>
+            </ul>
+
+            <div class="form-btns">
+                <button type="submit" class="btn-acao btn-confirmar-exclusao">Confirmar Exclusão</button>
+                <a href="./visualizacao_ponto.php" class="btn-acao btn-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy;2026 Ambientify. Todos os direitos reservados</p>
+    </footer>
 
 </body>
 

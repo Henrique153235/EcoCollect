@@ -1,0 +1,239 @@
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    --verde-principal: #6B7F3A;
+    --verde-hover: #57682F;
+    --fundo-pagina: #D7D2C7;
+    --branco: #FFFFFF;
+    --cor-texto: #4A3A2A;
+    --vermelho-remover: #A83232;
+    --vermelho-remover-hover: #862626;
+    --cinza-borda: #B8B3A8;
+    --cinza-hover: #9E998E;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--fundo-pagina);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: var(--verde-principal);
+    color: var(--branco);
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+header .nome-projeto h1,
+header .nome-projeto h3 {
+    font-weight: normal;
+}
+
+header nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: var(--branco);
+    transition: filter 0.2s, text-decoration 0.2s ease;
+}
+
+header nav details {
+    position: relative;
+    display: inline-block;
+}
+
+header nav details summary {
+    cursor: pointer;
+    user-select: none;
+    color: var(--branco);
+    transition: filter 0.2s, text-decoration 0.2s ease;
+}
+
+header nav details .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--verde-principal);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+header nav details .sub-menu a {
+    white-space: nowrap;
+}
+
+header nav details .sub-menu.menu-direita {
+    left: auto;
+    right: 0;
+}
+
+header nav a:hover,
+header nav summary:hover {
+    text-decoration: underline;
+}
+
+main {
+    background-color: var(--branco);
+    color: var(--cor-texto);
+    padding: 30px;
+    border-radius: 8px;
+    width: 85%;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    flex: 1;
+}
+
+.box-titulo {
+    font-weight: normal;
+    background-color: var(--verde-principal);
+    color: var(--branco);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: var(--cor-texto);
+}
+
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--cinza-borda);
+    border-radius: 6px;
+    font-size: 1rem;
+    color: var(--cor-texto);
+    background-color: var(--branco);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus {
+    border-color: var(--verde-principal);
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    border: 2px solid var(--cinza-borda);
+    border-radius: 6px;
+}
+
+.checkbox-label {
+    font-weight: normal !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    accent-color: var(--verde-principal);
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.form-btns {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-acao {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    color: var(--branco);
+    font-size: 0.95rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-confirmar {
+    background-color: var(--verde-principal);
+}
+
+.btn-confirmar:hover {
+    background-color: var(--verde-hover);
+}
+
+.btn-limpar {
+    background-color: var(--cinza-borda);
+    color: var(--cor-texto);
+}
+
+.btn-limpar:hover {
+    background-color: var(--cinza-hover);
+}
+
+.btn-cancelar {
+    background-color: var(--vermelho-remover);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cancelar:hover {
+    background-color: var(--vermelho-remover-hover);
+}
+
+footer {
+    background-color: var(--verde-principal);
+    color: var(--branco);
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+}

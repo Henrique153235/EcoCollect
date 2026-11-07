@@ -35,6 +35,36 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
 
+    <header>
+        <div class="nome-projeto">
+            <h1>EcoCollect</h1>
+            <h3>by Ambientify</h3>
+        </div>
+
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="dashboard.html">Dashboard</a>
+
+            <details name="menu-nav">
+                <summary>Cadastro</summary>
+                <div class="sub-menu">
+                    <a href="">Usuário</a>
+                    <a href="">Ponto de Coleta</a>
+                    <a href="">Campanha</a>
+                </div>
+            </details>
+
+            <details name="menu-nav">
+                <summary>Coletas</summary>
+                <div class="sub-menu menu-direita">
+                    <a href="">Orientações de Descarte</a>
+                    <a href="">Campanhas de Descarte</a>
+                    <a href="">Pontos de Coleta Próximos</a>
+                </div>
+            </details>
+        </nav>
+    </header>
+
     <main>
 
         <form action="" method="post">
@@ -61,6 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </form>
 
     </main>
+
+    <footer>
+        <p>&copy;2026 Ambientify. Todos os direitos reservados</p>
+    </footer>
 
 </body>
 

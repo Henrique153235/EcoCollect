@@ -3,6 +3,13 @@
 require_once __DIR__ . '/banco/crud.php';
 require_once __DIR__ . '/banco/database.php';
 
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+if ($id == 0) {
+    header("Location: visualizacao_ponto.php?erro=id_invalido");
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['id'])) {
     $pontoColeta = read(database(), "PontosDeColeta", "id = {$_GET['id']}");
     $materiaisPonto = readAll(database(), "ViewMateriaisDoPonto", "idPonto = {$_GET['id']}");
