@@ -196,11 +196,11 @@ form {
     transition: background-color 0.2s ease;
 }
 
-.btn-configurar {
+.btn-confirmar {
     background-color: var(--verde-principal);
 }
 
-.btn-configurar:hover {
+.btn-confirmar:hover {
     background-color: var(--verde-hover);
 }
 

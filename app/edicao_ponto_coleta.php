@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['id'])) {
                 <label for="status">Status:</label>
                 <select name="status" id="">
                     <option value="disponivel"
-                        <?php if ($pontoColeta['status'] == "disponivel") echo "selected"; ?>>disponível</option>
+                        <?php if ($pontoColeta['status'] == "disponivel") echo "selected"; ?>>Disponível</option>
                     <option value="indisponivel"
                         <?php if ($pontoColeta['status'] == "indisponivel") echo "selected"; ?>>Indisponível</option>
                 </select>

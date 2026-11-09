@@ -123,25 +123,36 @@ main {
     text-align: center;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.box-titulo {
+    font-weight: normal;
+    background-color: var(--verde-principal);
+    color: var(--branco);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
-.form-group {
+form {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.form-group label {
+.form-option {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-option > label {
     font-weight: bold;
     color: var(--cor-texto);
 }
 
-.form-group input[type="text"],
-.form-group select {
+.form-option input[type="text"],
+.form-option select {
     width: 100%;
     padding: 10px;
     border: 2px solid var(--cinza-borda);
@@ -153,29 +164,21 @@ form {
     transition: border-color 0.2s ease;
 }
 
-.form-group input[type="text"]:focus,
-.form-group select:focus {
+.form-option input[type="text"]:focus,
+.form-option select:focus {
     border-color: var(--verde-principal);
 }
 
-.checkbox-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px;
-    border: 2px solid var(--cinza-borda);
-    border-radius: 6px;
-}
-
-.checkbox-label {
-    font-weight: normal !important;
+.form-option label[for]:not([for="cep"]):not([for="materiais"]):not([for="status"]){
+    font-weight: normal;
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    padding: 4px 0;
 }
 
-.checkbox-label input[type="checkbox"] {
+.form-option input[type="checkbox"] {
     accent-color: var(--verde-principal);
     width: 18px;
     height: 18px;
@@ -184,18 +187,18 @@ form {
 
 .form-btns {
     display: flex;
-    gap: 12px;
+    gap: 15px;
     margin-top: 10px;
 }
 
 .btn-acao {
     flex: 1;
     text-align: center;
-    padding: 10px;
+    padding: 10px 15px;
     text-decoration: none;
     border-radius: 4px;
     color: var(--branco);
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: bold;
     border: none;
     cursor: pointer;
@@ -210,20 +213,8 @@ form {
     background-color: var(--verde-hover);
 }
 
-.btn-limpar {
-    background-color: var(--cinza-borda);
-    color: var(--cor-texto);
-}
-
-.btn-limpar:hover {
-    background-color: var(--cinza-hover);
-}
-
 .btn-cancelar {
     background-color: var(--vermelho-remover);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .btn-cancelar:hover {
@@ -235,5 +226,5 @@ footer {
     color: var(--branco);
     text-align: center;
     padding: 15px;
-    width: 100%;
+    width: 100;
 }

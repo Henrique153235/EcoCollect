@@ -67,27 +67,35 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <main>
 
+    <h2 class="box-titulo">Cadastrar Ponto de Coleta</h2>
         <form action="" method="post">
-            <h1>Cadastro de Ponto de Coleta</h1>
-            <label for="cep">Cep:</label>
-            <input type="text" name="cep" id="cep">
-            <?php
-            $materiais = readAll(database(), "Material");
-            foreach ($materiais as $m): ?>
-                <label for="<?= $m['tipo'] ?>">
-                    <input type="checkbox" id="<?= $m['tipo'] ?>" name="opcoes[<?= $m['tipo'] ?>]" value="<?= $m['id'] ?>">
-                    <?= $m['tipo'] ?>
-                </label>
-            <?php endforeach; ?>
+            <div class="form-option">
+                <label for="cep">Cep:</label>
+                <input type="text" name="cep" id="cep" value="">
+            </div>
+            <div class="form-option">
+                <label for="materiais">Materiais:</label>
+                <?php
+                $materiais = readAll(database(), "Material");
+                foreach ($materiais as $m): ?>
+                    <label for="<?= $m['tipo'] ?>">
+                        <input type="checkbox" id="<?= $m['tipo'] ?>" name="opcoes[<?= $m['tipo'] ?>]" value="<?= $m['id'] ?>">
+                        <?= $m['tipo'] ?>
+                    </label>
+                <?php endforeach; ?>
+            </div>
+            <div class="form-option">
+                <label for="status">Status:</label>
+                <select name="status" id="">
+                    <option value="disponivel">Disponível</option>
+                    <option value="indisponivel">Indisponível</option>
+                </select>
+            </div>
 
-            <select name="status" id="">
-                <option value="disponivel">disponível</option>
-                <option value="indisponivel">Indisponível</option>
-            </select>
-
-            <button type="submit">Confirmar</button>
-            <button type="reset">Limpar</button>
-            <button type="button"><a href="./visualizacao_ponto.php">Cancelar</a></button>
+            <div class="form-btns">
+                <button type="submit" class="btn-acao btn-confirmar">Confirmar</button>
+                <a href="./visualizacao_ponto.php" class="btn-acao btn-cancelar">Cancelar</a>
+            </div>
         </form>
 
     </main>
