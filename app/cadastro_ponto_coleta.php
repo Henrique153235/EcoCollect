@@ -83,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <?= $m['tipo'] ?>
                     </label>
                 <?php endforeach; ?>
+                
             </div>
             <div class="form-option">
                 <label for="status">Status:</label>

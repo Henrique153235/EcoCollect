@@ -83,3 +83,19 @@ FROM PontoMaterial pm
 INNER JOIN Material m ON pm.idMaterial = m.id;
 
 select * from ViewMateriaisDoPonto where idPonto = 1;
+
+ALTER TABLE Usuarios 
+ADD COLUMN senha VARCHAR(255) NOT NULL AFTER email;
+
+SELECT DISTINCT idPonto, cep, status
+FROM ViewPontosFiltro
+WHERE 1=1
+  AND (:status IS NULL OR status = :status)
+  AND (:idMaterial IS NULL OR idMaterial = :idMaterial);
+
+INSERT INTO Material (tipo, valorUnidade) VALUES 
+('plasticos', 1.00),
+('metais', 5.00),
+('papeis', 1.00),
+('vidros', 3.00),
+('organico', 0.50);
