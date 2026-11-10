@@ -1,23 +1,42 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Início |EcoCollect</title>
-    <link rel="stylesheet" href="style.css/dashboard.css">
+    <link rel="stylesheet" href="style.css/index.css">
 </head>
 <body>
-    <header>
-    <div class="logo-container"></div>
-        <h1>EcoCollect</h1>
-        <span>by Ambientify</span>
-    </div>
-        <nav class = "menu">
-            <a class="Pagina-inicial" href="index.html">Início</a>
+   <header>
+        <div class="nome-projeto">
+            <h1>EcoCollect</h1>
+            <h3>by Ambientify</h3>
+        </div>
+
+        <nav>
+            <a href="index.html">Início</a>
             <a href="dashboard.html">Dashboard</a>
-            <a href="">Cadastro</a>
-            <a href="coletas.html">Coletas</a>
+            <a href="login.html">Login</a>
+            <details name="menu-nav">
+                <summary>Cadastro</summary>
+                <div class="sub-menu">
+                    <a href="">Usuário</a>
+                    <a href="">Ponto de Coleta</a>
+                    <a href="">Campanha</a>
+                </div>
+            </details>
+
+            <details name="menu-nav">
+                <summary>Coletas</summary>
+                <div class="sub-menu menu-direita">
+                    <a href="">Orientações de Descarte</a>
+                    <a href="">Campanhas de Descarte</a>
+                    <a href="">Pontos de Coleta Próximos</a>
+                </div>
+            </details>
         </nav>
     </header>
+    <main>
     <div class="usuario">
         <div class="foto-perfil">
             <img 
