@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | EcoCollect </title>
+</head>
+<body>
+     <header>
+        <div class="nome-projeto">
+            <h1>EcoCollect</h1>
+            <h3>by Ambientify</h3>
+        </div>
+
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="dashboard.html">Dashboard</a>
+
+            <details name="menu-nav">
+                <summary>Cadastro</summary>
+                <div class="sub-menu">
+                    <a href="">Usuário</a>
+                    <a href="">Ponto de Coleta</a>
+                    <a href="">Campanha</a>
+                </div>
+            </details>
+
+            <details name="menu-nav">
+                <summary>Coletas</summary>
+                <div class="sub-menu menu-direita">
+                    <a href="">Orientações de Descarte</a>
+                    <a href="">Campanhas de Descarte</a>
+                    <a href="">Pontos de Coleta Próximos</a>
+                </div>
+            </details>
+        </nav>
+    </header>
+
+    <main>
+
+        <h2>Bem-Vindo <?= $Usuarios['nome']?> </h2>
+        <section class="container-perfil">
+            <div class="img-perfil">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk1DmDv1tDWXeR67DOLsQe5a5IhJFgwrW8l_4eJElvjQ&s=10" alt="">
+            </div>
+
+            <div class="conteudo-perfil">
+                <h2><?= htmlspecialchars($Usuarios['nome']) ?></h2>
+                <h3>E-mail: <?= htmlspecialchars($Usuarios['email']) ?></h3>
+                <h3>Telefone: <?= htmlspecialchars($Usuarios['telefone']) ?></h3>
+                <h3>Perfil: <?= htmlspecialchars($Usuarios['perfil']) ?></h3>
+            </div>
+        </section>
+
+        <section class="container-coleta">
+            <div class="conteudo-coleta">
+                <h1>Total Coletado:</h1>
+                <h2>1.2KG</h3>
+            </div>
+        </section>
+
+        <section class="container-ponto">
+            <div class="conteudo-ponto">
+                <h1>EcoPontos Coletados:</h1>
+                <h2>1,500 pts</h2>
+            </div>
+        </section>
+        <hr>
+
+        <h2>DashBoard</h2>
+
+        
+    </main>
+</body>
+</html>
