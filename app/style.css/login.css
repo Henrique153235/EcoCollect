@@ -1,0 +1,199 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #979593;
+  
+}
+
+
+header {
+  background-color: #6B7F3A;
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+
+header h1 {
+  font-size: 36px;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  background-color: #6B7F3A;
+  padding: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  padding: 8px;
+}
+
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    --verde-principal: #6B7F3A;
+    --fundo-pagina: #D7D2C7;
+    --branco: #FFFFFF;
+    --cor-texto: #4A3A2A;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--fundo-pagina);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+header {
+    background-color: var(--verde-principal);
+    color: var(--branco);
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+header .nome-projeto {
+    width: 25%;
+}
+
+header .nome-projeto h1,
+h3 {
+    font-weight: normal;
+}
+
+header nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: var(--branco);
+}
+
+header nav details {
+    position: relative;
+    display: inline-block;
+}
+
+header nav details summary {
+    cursor: pointer;
+    user-select: none;
+}
+
+header nav details .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--verde-principal);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+
+header nav details .sub-menu a {
+    white-space: nowrap;
+}
+
+
+header nav details:last-child .submenu {
+    left: auto;
+    right: 0;
+}
+
+header nav details .sub-menu.menu-direita {
+    left: auto;
+    right: 0;
+}
+
+header nav a:hover, header nav summary:hover {
+    text-decoration: underline;
+}
+
+
+
+.campos {
+    background-color: #d6d6d6;
+    padding: 20px 7px 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+input {
+    background-color: #b5b5b5;
+    border: none;
+    height: 25px;
+    padding: 5px;
+    outline: none;
+}
+
+.campos a {
+    font-size: 11px;
+    color: #1d4030;
+    text-align: right;
+    margin-top: 12px;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 30px;
+    background-color: #1d4030;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cadastro {
+    font-size: 12px;
+    text-align: center;
+}
+
+.cadastro a {
+    color: #1d4030;
+    font-weight: bold;
+    text-decoration: none;
+}
