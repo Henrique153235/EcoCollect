@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/init.php';
 
-// Usuário logado (utiliza $pdo vindo do init.php)
 $idUsuarioLogado = $_SESSION['usuario_id'] ?? 1;
 
 $stmtUser = $pdo->prepare("SELECT * FROM Usuarios WHERE id = :id");
@@ -16,7 +15,6 @@ if (!$usuarioLogado) {
 $mensagemSucesso = "";
 $mensagemErro = "";
 
-// Processamento de Nova Coleta (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'registrar_coleta') {
     $idPonto = filter_input(INPUT_POST, 'idPonto', FILTER_VALIDATE_INT);
     $idMaterial = filter_input(INPUT_POST, 'idMaterial', FILTER_VALIDATE_INT);
@@ -55,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// Consultas
 $stmtStats = $pdo->prepare("SELECT COUNT(id) AS totalColetas, COALESCE(SUM(pontuacao), 0) AS totalPontos FROM Coleta WHERE idUsuario = :id");
 $stmtStats->execute([':id' => $idUsuarioLogado]);
 $estatisticas = $stmtStats->fetch(PDO::FETCH_ASSOC);
@@ -80,7 +77,6 @@ $historicoColetas = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
 $pontosDisponiveis = readAll($pdo, "PontosDeColeta", "status = ?", ['disponivel']);
 $listaMateriais = readAll($pdo, "Material");
 
-// Filtros de Pontos
 $statusFiltro = $_GET['status'] ?? '';
 $materialFiltro = $_GET['idMaterial'] ?? '';
 
@@ -251,38 +247,41 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
 
         <section class="dashboard-container" style="margin-top: 2rem;">
             <div class="dashboard-header">
-                <h2 class="box-titulo">🔍 Explorar Pontos de Coleta</h2>
+                <h2 class="box-titulo">Explorar Pontos de Coleta</h2>
             </div>
 
-            <form method="GET" action="dashboard.php" class="form-filtro">
-                <div class="campo-filtro">
-                    <label for="status">Status:</label>
-                    <select name="status" id="status">
-                        <option value="">Todos os status</option>
-                        <option value="disponivel" <?= $statusFiltro === 'disponivel' ? 'selected' : '' ?>>Disponível</option>
-                        <option value="indisponivel" <?= $statusFiltro === 'indisponivel' ? 'selected' : '' ?>>Indisponível</option>
-                    </select>
-                </div>
+           <details>
+                <summary>Opções de Filtragem</summary>
+                <form method="GET" action="" class="form-filtro">
+                    <div class="campo-filtro">
+                        <label for="status">Status:</label>
+                        <select name="status" id="status">
+                            <option value="">Todos os status</option>
+                            <option value="disponivel" <?= $statusFiltro === 'disponivel' ? 'selected' : '' ?>>Disponível</option>
+                            <option value="indisponivel" <?= $statusFiltro === 'indisponivel' ? 'selected' : '' ?>>Indisponível</option>
+                        </select>
+                    </div>
 
-                <div class="campo-filtro">
-                    <label for="materialFiltro">Material:</label>
-                    <select name="idMaterial" id="materialFiltro">
-                        <option value="">Todos os materiais</option>
-                        <?php foreach ($listaMateriais as $mat): ?>
-                            <option value="<?= $mat['id'] ?>" <?= $materialFiltro == $mat['id'] ? 'selected' : '' ?>>
-                                <?= htmlspecialchars(ucfirst($mat['tipo'])) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+                    <div class="campo-filtro">
+                        <label for="idMaterial">Material:</label>
+                        <select name="idMaterial" id="idMaterial">
+                            <option value="">Todos os materiais</option>
+                            <?php foreach ($listaMateriais as $mat): ?>
+                                <option value="<?= $mat['id'] ?>" <?= $materialFiltro == $mat['id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars(ucfirst($mat['tipo'])) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
 
-                <div class="botoes-filtro">
-                    <button type="submit" class="btn-filtrar">Filtrar</button>
-                    <?php if (!empty($statusFiltro) || !empty($materialFiltro)): ?>
-                        <a href="dashboard.php" class="btn-limpar">Limpar Filtros</a>
-                    <?php endif; ?>
-                </div>
-            </form>
+                    <div class="botoes-filtro">
+                        <button type="submit" class="btn-filtrar">Filtrar</button>
+                        <?php if (!empty($statusFiltro) || !empty($materialFiltro)): ?>
+                            <a href="visualizacao_ponto.php" class="btn-limpar">Limpar Filtros</a>
+                        <?php endif; ?>
+                    </div>
+                </form>
+            </details>
 
             <div class="grid-cards">
                 <?php if (empty($pontosColetaFiltrados)): ?>

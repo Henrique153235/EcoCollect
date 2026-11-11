@@ -1,11 +1,11 @@
 <!-- <?php
 
-require_once __DIR__ . "/banco/crud.php";
-require_once __DIR__ . "/banco/database.php";
+        require_once __DIR__ . "/banco/crud.php";
+        require_once __DIR__ . "/banco/database.php";
 
-$pontoColeta = readAll(database(), "ViewPontosDeColeta");
+        $pontoColeta = readAll(database(), "ViewPontosDeColeta");
 
-?>
+        ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -182,35 +182,39 @@ $pontoColeta = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a href="cadastro_ponto_coleta.php" class="btn-cadastrar">Cadastrar Novo Ponto</a>
             </div>
 
-            <form method="GET" action="" class="form-filtro">
-                <div class="campo-filtro">
-                    <label for="status">Status:</label>
-                    <select name="status" id="status">
-                        <option value="">Todos os status</option>
-                        <option value="disponivel" <?= $statusFiltro === 'disponivel' ? 'selected' : '' ?>>Disponível</option>
-                        <option value="indisponivel" <?= $statusFiltro === 'indisponivel' ? 'selected' : '' ?>>Indisponível</option>
-                    </select>
-                </div>
 
-                <div class="campo-filtro">
-                    <label for="idMaterial">Material:</label>
-                    <select name="idMaterial" id="idMaterial">
-                        <option value="">Todos os materiais</option>
-                        <?php foreach ($listaMateriais as $mat): ?>
-                            <option value="<?= $mat['id'] ?>" <?= $materialFiltro == $mat['id'] ? 'selected' : '' ?>>
-                                <?= htmlspecialchars(ucfirst($mat['tipo'])) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+            <details>
+                <summary>Opções de Filtragem</summary>
+                <form method="GET" action="" class="form-filtro">
+                    <div class="campo-filtro">
+                        <label for="status">Status:</label>
+                        <select name="status" id="status">
+                            <option value="">Todos os status</option>
+                            <option value="disponivel" <?= $statusFiltro === 'disponivel' ? 'selected' : '' ?>>Disponível</option>
+                            <option value="indisponivel" <?= $statusFiltro === 'indisponivel' ? 'selected' : '' ?>>Indisponível</option>
+                        </select>
+                    </div>
 
-                <div class="botoes-filtro">
-                    <button type="submit" class="btn-filtrar">Filtrar</button>
-                    <?php if (!empty($statusFiltro) || !empty($materialFiltro)): ?>
-                        <a href="visualizacao_ponto.php" class="btn-limpar">Limpar Filtros</a>
-                    <?php endif; ?>
-                </div>
-            </form>
+                    <div class="campo-filtro">
+                        <label for="idMaterial">Material:</label>
+                        <select name="idMaterial" id="idMaterial">
+                            <option value="">Todos os materiais</option>
+                            <?php foreach ($listaMateriais as $mat): ?>
+                                <option value="<?= $mat['id'] ?>" <?= $materialFiltro == $mat['id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars(ucfirst($mat['tipo'])) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="botoes-filtro">
+                        <button type="submit" class="btn-filtrar">Filtrar</button>
+                        <?php if (!empty($statusFiltro) || !empty($materialFiltro)): ?>
+                            <a href="visualizacao_ponto.php" class="btn-limpar">Limpar Filtros</a>
+                        <?php endif; ?>
+                    </div>
+                </form>
+            </details>
 
             <div class="grid-cards">
                 <?php if (empty($pontoColeta)): ?>

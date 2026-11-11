@@ -1,3 +1,17 @@
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    --verde-principal: #6B7F3A;
+    --verde-hover: #57682F;
+    --fundo-pagina: #D7D2C7;
+    --branco: #FFFFFF;
+    --cor-texto: #4A3A2A;
+    --vermelho-remover: #A83232;
+    --vermelho-remover-hover: #862626;
+    --cinza-borda: #B8B3A8;
+}
+
+
 .dashboard-main {
     max-width: 1200px;
     margin: 2rem auto;
@@ -6,8 +20,8 @@
 
 
 .welcome-banner {
-    background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-    color: #ffffff;
+    background-color: var(--verde-principal);
+    color: var(--branco);
     padding: 2rem;
     border-radius: 12px;
     display: flex;
@@ -16,6 +30,7 @@
     flex-wrap: wrap;
     gap: 1.5rem;
     margin-bottom: 2rem;
+    margin-top: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -48,7 +63,7 @@
     display: block;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--branco);
 }
 
 .stat-label {
@@ -56,7 +71,6 @@
     opacity: 0.85;
 }
 
-/* Layout Duas Colunas */
 .dashboard-grid-2col {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
@@ -70,7 +84,7 @@
 }
 
 .card-box {
-    background: #ffffff;
+    background: var(--branco);
     border-radius: 10px;
     padding: 1.5rem;
     border: 1px solid #e0e0e0;
@@ -116,7 +130,7 @@
 
 .btn-primary {
     width: 100%;
-    background-color: #2e7d32;
+    background-color: var(--verde-principal);
     color: white;
     padding: 0.85rem;
     border: none;
@@ -128,7 +142,7 @@
 }
 
 .btn-primary:hover {
-    background-color: #1b5e20;
+    background-color: var(--verde-hover);
 }
 
 .alert {
