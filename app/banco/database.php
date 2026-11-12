@@ -12,7 +12,7 @@ function database(): PDO
 
     $host = getenv('DB_HOST') ?: 'localhost';
     $port = getenv('DB_PORT') ?: '3309';
-    $database = getenv('DB_DATABASE') ?: 'EcoCollecteste';
+    $database = getenv('DB_DATABASE') ?: 'EcoCollect';
     $username = getenv('DB_USERNAME') ?: 'root';
     $password = getenv('DB_PASSWORD') ?: 'senai123';
 
