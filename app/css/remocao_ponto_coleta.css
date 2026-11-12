@@ -190,11 +190,11 @@ main {
                 }
 
                 &.btn-cancelar {
-                    background-color: var(--cinza-borda);
-                    color: var(--cor-texto);
+                    background-color: var(--verde-principal);
+                    color: var(--branco);
 
                     &:hover {
-                        background-color: var(--cinza-hover);
+                        background-color: var(--verde-hover);
                     }
                 }
             }
