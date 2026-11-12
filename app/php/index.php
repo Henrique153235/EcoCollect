@@ -1,16 +1,16 @@
-<?php
+<!-- <?php
 
-declare(strict_types=1);
+// declare(strict_types=1);
 
-$databaseStatus = 'Conectado';
+// $databaseStatus = 'Conectado';
 
-try {
-    require_once __DIR__ . '/init.php';
-    $pdo->query('SELECT 1');
-} catch (Throwable $exception) {
-    $databaseStatus = 'Indisponível';
-}
-?>
+// try {
+//     require_once __DIR__ . '/init.php';
+//     $pdo->query('SELECT 1');
+// } catch (Throwable $exception) {
+//     $databaseStatus = 'Indisponível';
+// }
+// ?>
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -31,4 +31,8 @@ try {
     </div>
     <p>Comece a aplicação editando <code>app/index.php</code>.</p>
 </body>
-</html>
+</html> -->
+
+<?php
+header("Location: login_usuario.php");
+exit;
