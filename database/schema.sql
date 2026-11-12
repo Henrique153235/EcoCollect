@@ -4,10 +4,6 @@ CREATE DATABASE IF NOT EXISTS EcoCollect
 
 USE EcoCollect;
 
--- ==========================================================
--- 1. TABELAS
--- ==========================================================
-
 CREATE TABLE Usuarios (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -30,7 +26,6 @@ CREATE TABLE Material (
     valorUnidade DECIMAL(10,2) NOT NULL DEFAULT 1.00
 ) ENGINE=InnoDB;
 
--- Tabela associativa N:M otimizada (sem duplicidade de material por ponto)
 CREATE TABLE PontoMaterial (
     id INT PRIMARY KEY AUTO_INCREMENT,
     idPonto INT NOT NULL,
@@ -57,20 +52,12 @@ CREATE TABLE Coleta (
     CONSTRAINT fk_coleta_usuario FOREIGN KEY (idUsuario) REFERENCES Usuarios(id)
 ) ENGINE=InnoDB;
 
--- ==========================================================
--- 2. DADOS INICIAIS
--- ==========================================================
-
 INSERT INTO Material (tipo, valorUnidade) VALUES 
 ('plasticos', 1.00),
 ('metais', 5.00),
 ('papeis', 1.00),
 ('vidros', 3.00),
 ('organico', 0.50);
-
--- ==========================================================
--- 3. VIEWS
--- ==========================================================
 
 CREATE OR REPLACE VIEW ViewPontosDeColeta AS
 SELECT
@@ -105,7 +92,6 @@ SELECT
 FROM PontoMaterial pm
 INNER JOIN Material m ON pm.idMaterial = m.id;
 
--- View utilizada pela sua consulta de filtro no back-end
 CREATE OR REPLACE VIEW ViewPontosFiltro AS
 SELECT
     p.id AS idPonto,
