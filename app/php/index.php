@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 declare(strict_types=1);
 
@@ -31,4 +31,8 @@ try {
     </div>
     <p>Comece a aplicação editando <code>app/index.php</code>.</p>
 </body>
-</html>
+</html> -->
+
+<?php
+header("Location: login_usuario.php");
+exit;

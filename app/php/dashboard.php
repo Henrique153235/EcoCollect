@@ -2,46 +2,48 @@
 
 require_once __DIR__ . '/init.php';
 
-$idUsuarioLogado = $_SESSION['usuario_id'] ?? 1;
-
-$stmtUser = $pdo->prepare("SELECT * FROM Usuarios WHERE id = :id");
-$stmtUser->execute([':id' => $idUsuarioLogado]);
-$usuarioLogado = $stmtUser->fetch(PDO::FETCH_ASSOC);
-
-if (!$usuarioLogado) {
-    $usuarioLogado = ['id' => 1, 'nome' => 'Usuário EcoCollect', 'email' => 'usuario@ecocollect.com'];
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login_usuario.php");
+    exit;
 }
 
-$mensagemSucesso = "";
-$mensagemErro = "";
+$idUsuarioLogado = (int) $_SESSION['usuario_id'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'registrar_coleta') {
+$usuarioLogado = read($pdo, "Usuarios", "id = ?", [$idUsuarioLogado]);
+
+if (!$usuarioLogado) {
+    $usuarioLogado = ['id' => $idUsuarioLogado, 'nome' => 'Usuário EcoCollect', 'email' => 'usuario@ecocollect.com'];
+}
+
+// Recupera mensagens flash da sessão (evita reenvio ao recarregar)
+$mensagemSucesso = $_SESSION['flash_sucesso'] ?? "";
+$mensagemErro = $_SESSION['flash_erro'] ?? "";
+unset($_SESSION['flash_sucesso'], $_SESSION['flash_erro']);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'registrar_coleta') {
     $idPonto = filter_input(INPUT_POST, 'idPonto', FILTER_VALIDATE_INT);
     $idMaterial = filter_input(INPUT_POST, 'idMaterial', FILTER_VALIDATE_INT);
     $quantidade = filter_input(INPUT_POST, 'quantidadeColetada', FILTER_VALIDATE_FLOAT);
 
     if ($idPonto && $idMaterial && $quantidade && $quantidade > 0) {
         try {
-            $stmtMat = $pdo->prepare("SELECT valorUnidade FROM Material WHERE id = :id");
-            $stmtMat->execute([':id' => $idMaterial]);
-            $materialInfo = $stmtMat->fetch(PDO::FETCH_ASSOC);
+            $materialInfo = read($pdo, "Material", "id = ?", [$idMaterial]);
 
             if ($materialInfo) {
                 $valorUnidade = (float) $materialInfo['valorUnidade'];
                 $pontuacaoCalculada = $quantidade * $valorUnidade;
 
-                $sqlInsert = "INSERT INTO Coleta (idPonto, idMaterial, idUsuario, quantidadeColetada, pontuacao) 
-                              VALUES (:idPonto, :idMaterial, :idUsuario, :quantidade, :pontuacao)";
-                $stmtInsert = $pdo->prepare($sqlInsert);
-                $stmtInsert->execute([
-                    ':idPonto' => $idPonto,
-                    ':idMaterial' => $idMaterial,
-                    ':idUsuario' => $idUsuarioLogado,
-                    ':quantidade' => $quantidade,
-                    ':pontuacao' => $pontuacaoCalculada
+                create($pdo, "Coleta", [
+                    'idPonto' => $idPonto,
+                    'idMaterial' => $idMaterial,
+                    'idUsuario' => $idUsuarioLogado,
+                    'quantidadeColetada' => $quantidade,
+                    'pontuacao' => $pontuacaoCalculada,
                 ]);
 
-                $mensagemSucesso = "Coleta registrada com sucesso! Você acumulou " . number_format($pontuacaoCalculada, 2, ',', '.') . " pontos.";
+                $_SESSION['flash_sucesso'] = "Coleta registrada com sucesso! Você acumulou " . number_format($pontuacaoCalculada, 2, ',', '.') . " pontos.";
+                header("Location: dashboard.php");
+                exit;
             } else {
                 $mensagemErro = "Material selecionado é inválido.";
             }
@@ -109,8 +111,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | EcoCollect</title>
-    <link rel="stylesheet" href="visualizacao_ponto.css">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
@@ -128,7 +129,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
             <details name="menu-nav">
                 <summary>Cadastro</summary>
                 <div class="sub-menu">
-                    <a href="">Usuário</a>
+                    <a href="cadastro_usuario.php">Usuário</a>
                     <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
                     <a href="">Campanha</a>
                 </div>
@@ -139,7 +140,15 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                 <div class="sub-menu menu-direita">
                     <a href="">Orientações de Descarte</a>
                     <a href="">Campanhas de Descarte</a>
-                    <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
+                    <a href="./visualizacao_ponto.php">Pontos de Coleta Próximos</a>
+                </div>
+            </details>
+
+            <details name="menu-nav">
+                <summary>Perfil</summary>
+                <div class="sub-menu menu-direita">
+                    <a href="editar_usuario.php">Editar Perfil</a>
+                    <a href="logout.php">Sair</a>
                 </div>
             </details>
         </nav>
@@ -184,7 +193,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                         <select name="idPonto" id="idPonto" required>
                             <option value="">Selecione o ponto:</option>
                             <?php foreach ($pontosDisponiveis as $ponto): ?>
-                                <?php $cep_fmt = substr($ponto['cep'], 0, 5) . '-' . substr($ponto['cep'], 5); ?>
+                                <?php $cep_fmt = (strlen($ponto['cep']) === 8) ? substr($ponto['cep'], 0, 5) . '-' . substr($ponto['cep'], 5) : $ponto['cep']; ?>
                                 <option value="<?= $ponto['id'] ?>">Ponto #<?= $ponto['id'] ?> - CEP <?= htmlspecialchars($cep_fmt) ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -229,9 +238,10 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                             </thead>
                             <tbody>
                                 <?php foreach ($historicoColetas as $h): ?>
+                                    <?php $cep_hist = (strlen($h['cepPonto']) === 8) ? substr($h['cepPonto'], 0, 5) . '-' . substr($h['cepPonto'], 5) : $h['cepPonto']; ?>
                                     <tr>
                                         <td><?= date('d/m/Y H:i', strtotime($h['dataColeta'])) ?></td>
-                                        <td><?= htmlspecialchars(substr($h['cepPonto'], 0, 5) . '-' . substr($h['cepPonto'], 5)) ?></td>
+                                        <td><?= htmlspecialchars($cep_hist) ?></td>
                                         <td><span class="badge-material"><?= htmlspecialchars(ucfirst($h['material'])) ?></span></td>
                                         <td><?= number_format($h['quantidadeColetada'], 2, ',', '.') ?></td>
                                         <td class="col-pontos">+<?= number_format($h['pontuacao'], 2, ',', '.') ?></td>
@@ -250,9 +260,9 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                 <h2 class="box-titulo">Explorar Pontos de Coleta</h2>
             </div>
 
-           <details>
+            <details class="filtro-box" <?= (!empty($statusFiltro) || !empty($materialFiltro)) ? 'open' : '' ?>>
                 <summary>Opções de Filtragem</summary>
-                <form method="GET" action="" class="form-filtro">
+                <form method="GET" action="dashboard.php" class="form-filtro">
                     <div class="campo-filtro">
                         <label for="status">Status:</label>
                         <select name="status" id="status">
@@ -263,8 +273,8 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                     </div>
 
                     <div class="campo-filtro">
-                        <label for="idMaterial">Material:</label>
-                        <select name="idMaterial" id="idMaterial">
+                        <label for="idMaterialFiltro">Material:</label>
+                        <select name="idMaterial" id="idMaterialFiltro">
                             <option value="">Todos os materiais</option>
                             <?php foreach ($listaMateriais as $mat): ?>
                                 <option value="<?= $mat['id'] ?>" <?= $materialFiltro == $mat['id'] ? 'selected' : '' ?>>
@@ -277,7 +287,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                     <div class="botoes-filtro">
                         <button type="submit" class="btn-filtrar">Filtrar</button>
                         <?php if (!empty($statusFiltro) || !empty($materialFiltro)): ?>
-                            <a href="visualizacao_ponto.php" class="btn-limpar">Limpar Filtros</a>
+                            <a href="dashboard.php" class="btn-limpar">Limpar Filtros</a>
                         <?php endif; ?>
                     </div>
                 </form>
@@ -298,7 +308,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
 
                             <div class="card-body">
                                 <p class="card-info">
-                                    <?php $cep_formatado = substr($p['cep'], 0, 5) . '-' . substr($p['cep'], 5); ?>
+                                    <?php $cep_formatado = (strlen($p['cep']) === 8) ? substr($p['cep'], 0, 5) . '-' . substr($p['cep'], 5) : $p['cep']; ?>
                                     <strong>CEP:</strong> <?= htmlspecialchars($cep_formatado) ?>
                                 </p>
                                 <p class="card-info">
