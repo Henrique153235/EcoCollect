@@ -96,6 +96,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <button type="submit" class="btn-acao btn-confirmar">Entrar</button>
             </div>
         </form>
+
+        <p class="txt-cadastro">Ainda não tem um cadastro?<a href="cadastro_usuario.php"> Cadastre-se aqui.</a></p>
     </main>
 
     <footer>

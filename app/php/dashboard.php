@@ -15,7 +15,6 @@ if (!$usuarioLogado) {
     $usuarioLogado = ['id' => $idUsuarioLogado, 'nome' => 'Usuário EcoCollect', 'email' => 'usuario@ecocollect.com'];
 }
 
-// Recupera mensagens flash da sessão (evita reenvio ao recarregar)
 $mensagemSucesso = $_SESSION['flash_sucesso'] ?? "";
 $mensagemErro = $_SESSION['flash_erro'] ?? "";
 unset($_SESSION['flash_sucesso'], $_SESSION['flash_erro']);
@@ -182,7 +181,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
 
         <div class="dashboard-grid-2col">
-            
+
             <section class="card-box">
                 <h3 class="box-subtitulo">Registrar Nova Coleta</h3>
                 <form method="POST" action="dashboard.php" class="form-coleta">
@@ -193,7 +192,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                         <select name="idPonto" id="idPonto" required>
                             <option value="">Selecione o ponto:</option>
                             <?php foreach ($pontosDisponiveis as $ponto): ?>
-                                <?php $cep_fmt = (strlen($ponto['cep']) === 8) ? substr($ponto['cep'], 0, 5) . '-' . substr($ponto['cep'], 5) : $ponto['cep']; ?>
+                                <?php $cep_fmt = (strlen($ponto['cep']) == 8) ? substr($ponto['cep'], 0, 5) . '-' . substr($ponto['cep'], 5) : $ponto['cep']; ?>
                                 <option value="<?= $ponto['id'] ?>">Ponto #<?= $ponto['id'] ?> - CEP <?= htmlspecialchars($cep_fmt) ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -205,7 +204,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                             <option value="">Material:</option>
                             <?php foreach ($listaMateriais as $mat): ?>
                                 <option value="<?= $mat['id'] ?>">
-                                    <?= htmlspecialchars(ucfirst($mat['tipo'])) ?> (<?= number_format($mat['valorUnidade'], 2, ',', '.') ?> pts/unid)
+                                    <?= htmlspecialchars(ucfirst($mat['tipo'])) ?> (<?= number_format($mat['valorUnidade'], 2, ',', '.') ?> pts/kg)
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -238,7 +237,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                             </thead>
                             <tbody>
                                 <?php foreach ($historicoColetas as $h): ?>
-                                    <?php $cep_hist = (strlen($h['cepPonto']) === 8) ? substr($h['cepPonto'], 0, 5) . '-' . substr($h['cepPonto'], 5) : $h['cepPonto']; ?>
+                                    <?php $cep_hist = (strlen($h['cepPonto']) == 8) ? substr($h['cepPonto'], 0, 5) . '-' . substr($h['cepPonto'], 5) : $h['cepPonto']; ?>
                                     <tr>
                                         <td><?= date('d/m/Y H:i', strtotime($h['dataColeta'])) ?></td>
                                         <td><?= htmlspecialchars($cep_hist) ?></td>

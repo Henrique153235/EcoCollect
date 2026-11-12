@@ -196,6 +196,15 @@ main {
             }
         }
     }
+
+    .txt-login{
+        text-align: center;
+        margin-top: 20px;
+        
+        a{
+            color: var(--verde-principal);
+        }
+    }
 }
 
 footer {
