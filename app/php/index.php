@@ -18,13 +18,13 @@
 
         <nav>
             <a href="index.html">Início</a>
-            <a href="dashboard.html">Dashboard</a>
+            <a href="dashboard.php">Dashboard</a>
 
             <details name="menu-nav">
                 <summary>Cadastro</summary>
                 <div class="sub-menu">
-                    <a href="">Usuário</a>
-                    <a href="">Ponto de Coleta</a>
+                    <a href="cadastro_usuario.php">Usuário</a>
+                    <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
                     <a href="">Campanha</a>
                 </div>
             </details>
@@ -34,7 +34,7 @@
                 <div class="sub-menu menu-direita">
                     <a href="">Orientações de Descarte</a>
                     <a href="">Campanhas de Descarte</a>
-                    <a href="">Pontos de Coleta Próximos</a>
+                    <a href="visualizacao_ponto">Pontos de Coleta Próximos</a>
                 </div>
             </details>
         </nav>

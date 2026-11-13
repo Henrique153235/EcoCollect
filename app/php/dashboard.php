@@ -26,9 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
 
     if ($idPonto && $idMaterial && $quantidade && $quantidade > 0) {
         try {
+            $vinculoValido = read($pdo, "PontoMaterial", "idPonto = ? AND idMaterial = ?", [$idPonto, $idMaterial]);
             $materialInfo = read($pdo, "Material", "id = ?", [$idMaterial]);
 
-            if ($materialInfo) {
+            if ($vinculoValido && $materialInfo) {
                 $valorUnidade = (float) $materialInfo['valorUnidade'];
                 $pontuacaoCalculada = $quantidade * $valorUnidade;
 
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
                 header("Location: dashboard.php");
                 exit;
             } else {
-                $mensagemErro = "Material selecionado é inválido.";
+                $mensagemErro = "O material selecionado não é aceito por este ponto de coleta.";
             }
         } catch (PDOException $e) {
             $mensagemErro = "Erro ao registrar coleta: " . $e->getMessage();
@@ -77,6 +78,17 @@ $historicoColetas = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
 
 $pontosDisponiveis = readAll($pdo, "PontosDeColeta", "status = ?", ['disponivel']);
 $listaMateriais = readAll($pdo, "Material");
+
+$materiaisPorPonto = readAll($pdo, "ViewMateriaisDoPonto");
+
+$mapaMateriaisPonto = [];
+foreach ($materiaisPorPonto as $item) {
+    $mapaMateriaisPonto[(int) $item['idPonto']][] = [
+        'id'           => (int) $item['idMaterial'],
+        'tipo'         => ucfirst($item['material']),
+        'valorUnidade' => number_format((float) $item['valorUnidade'], 2, ',', '.'),
+    ];
+}
 
 $statusFiltro = $_GET['status'] ?? '';
 $materialFiltro = $_GET['idMaterial'] ?? '';
