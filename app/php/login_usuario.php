@@ -5,18 +5,18 @@ require_once __DIR__ . '/init.php';
 $erro = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nomeInput  = trim($_POST['nome'] ?? '');
+    $emailInput  = trim($_POST['email'] ?? '');
     $senhaInput = trim($_POST['senha'] ?? '');
 
-    if (empty($nomeInput) || empty($senhaInput)) {
+    if (empty($emailInput) || empty($senhaInput)) {
         $erro = "Preencha todos os campos!";
     } else {
         try {
-            $usuarioEncontrado = read($pdo, "Usuarios", "nome = ?", [$nomeInput]);
+            $usuarioEncontrado = read($pdo, "Usuarios", "email = ?", [$emailInput]);
 
             if (
                 $usuarioEncontrado &&
-                (password_verify($senhaInput, $usuarioEncontrado['senha']) || $usuarioEncontrado['senha'] === $senhaInput)
+                (password_verify($senhaInput, $usuarioEncontrado['senha']) || $usuarioEncontrado['senha'] == $senhaInput)
             ) {
                 $_SESSION['usuario_id']     = $usuarioEncontrado['id'];
                 $_SESSION['usuario_nome']   = $usuarioEncontrado['nome'];
@@ -83,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <form action="" method="POST" autocomplete="off">
             <div class="form-option">
-                <label for="nome">Usuário:</label>
-                <input type="text" id="nome" name="nome" autocomplete="off" required>
+                <label for="nome">E-mail:</label>
+                <input type="email" id="email" name="email" autocomplete="off" required>
             </div>
 
             <div class="form-option">
