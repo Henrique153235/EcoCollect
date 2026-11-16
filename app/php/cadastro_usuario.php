@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </form>
 
-        <p class="txt-login">Já possui uma conta?<a href="login_usuario.php"> Entre aqui.</a></p>
+        <p class="txt-login">Já possui uma conta? <a href="login_usuario.php">Entre aqui.</a></p>
     </main>
 
     <footer>

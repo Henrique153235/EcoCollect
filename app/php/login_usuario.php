@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </form>
 
-        <p class="txt-cadastro">Ainda não tem um cadastro?<a href="cadastro_usuario.php"> Cadastre-se aqui.</a></p>
+        <p class="txt-cadastro">Ainda não tem um cadastro? <a href="cadastro_usuario.php">Cadastre-se aqui.</a></p>
     </main>
 
     <footer>
