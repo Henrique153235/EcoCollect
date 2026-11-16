@@ -135,7 +135,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
 
         <nav>
             <a href="index.php">Início</a>
-            <a href="dashboard.php" class="active">Dashboard</a>
+            <a class="pagina-atual" href="dashboard.php" class="active">Dashboard</a>
 
             <details name="menu-nav">
                 <summary>Cadastro</summary>

@@ -17,7 +17,7 @@
         </div>
 
         <nav>
-            <a href="index.html">Início</a>
+            <a class="pagina-atual" href="index.html">Início</a>
             <a href="dashboard.php">Dashboard</a>
 
             <details name="menu-nav">

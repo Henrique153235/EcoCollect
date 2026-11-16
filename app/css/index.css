@@ -153,3 +153,7 @@ footer {
     padding: 10px;
     width: 100%;
 }
+
+.pagina-atual{
+    border-bottom: 2px solid var(--branco);
+}

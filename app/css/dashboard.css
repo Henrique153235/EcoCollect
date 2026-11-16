@@ -503,3 +503,7 @@ footer {
     width: 100%;
     margin-top: auto;
 }
+
+.pagina-atual{
+    border-bottom: 2px solid var(--branco);
+}
