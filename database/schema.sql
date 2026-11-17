@@ -380,10 +380,6 @@ CREATE TABLE Coleta (
     CONSTRAINT fk_coleta_usuario FOREIGN KEY (idUsuario) REFERENCES Usuarios(id) ON DELETE CASCADE
 );
 
--- ==========================================
--- LOJA DE COLLETÁVEIS
--- ==========================================
-
 CREATE TABLE Brinde (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -407,10 +403,6 @@ CREATE TABLE ResgateBrinde (
     CONSTRAINT fk_resgate_usuario FOREIGN KEY (idUsuario) REFERENCES Usuarios(id) ON DELETE CASCADE,
     CONSTRAINT fk_resgate_brinde FOREIGN KEY (idBrinde) REFERENCES Brinde(id) ON DELETE RESTRICT
 );
-
--- ==========================================
--- CAMPANHAS DE COLETA
--- ==========================================
 
 CREATE TABLE Campanha (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -436,10 +428,6 @@ CREATE TABLE CampanhaMaterial (
     CONSTRAINT fk_cm_material FOREIGN KEY (idMaterial) REFERENCES Material(id) ON DELETE CASCADE
 );
 
--- ==========================================
--- DADOS INICIAIS
--- ==========================================
-
 INSERT INTO Material (tipo, valorUnidade) VALUES
 ('plasticos', 1.00),
 ('metais', 5.00),
@@ -452,10 +440,6 @@ INSERT INTO Brinde (nome, descricao, custoPontos, estoque) VALUES
 ('Garrafa Térmica Inox 500ml', 'Garrafa reutilizável para reduzir o consumo de plástico.', 120.00, 15),
 ('Kit Canudos de Inox + Escova', 'Conjunto sustentável com estojo de transporte.', 35.00, 40),
 ('Muda de Planta Nativa', 'Muda pronta para plantio com adubo orgânico.', 25.00, 50);
-
--- ==========================================
--- VIEWS
--- ==========================================
 
 CREATE OR REPLACE VIEW ViewPontosDeColeta AS
 SELECT

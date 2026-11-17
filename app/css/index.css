@@ -101,6 +101,11 @@ header nav details .sub-menu.menu-direita {
     right: 0;
 }
 
+header nav details .sub-menu.menu-perfil {
+    left: auto;
+    right: 0;
+}
+
 header nav a:hover, header nav summary:hover {
     text-decoration: underline;
 }

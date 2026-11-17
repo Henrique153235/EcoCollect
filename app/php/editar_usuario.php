@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $emailEmUso = read($pdo, "Usuarios", "email = ? AND id != ?", [$email, $idUsuarioLogado]);
 
                 if ($emailEmUso) {
-                    $mensagemErro = "Este e-mail já está em uso por outra conta.";
+                    $mensagemErro = "Este e-mail já está sendo utilizado por outra conta.";
                 } else {
                     $dadosAtualizados = [
                         'nome'     => $nome,

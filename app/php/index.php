@@ -38,6 +38,14 @@
                     <a href="visualizacao_ponto">Pontos de Coleta Próximos</a>
                 </div>
             </details>
+
+            <details name="menu-nav">
+                <summary>Perfil</summary>
+                <div class="sub-menu menu-perfil">
+                    <a href="editar_usuario.php">Editar Perfil</a>
+                    <a href="logout.php">Sair</a>
+                </div>
+            </details>
         </nav>
     </header>
 
