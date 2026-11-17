@@ -1,23 +1,27 @@
+<?php
+
+?>
+
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início | EcoCollect</title>
+    <title>EcoCollect | Inicio</title>
     <link rel="stylesheet" href="../css/index.css">
 </head>
 
 <body>
-
-    <header>
-        <div class="nome-projeto">
+    <header class="header">
+        <div class="logo">
             <h1>EcoCollect</h1>
             <h3>by Ambientify</h3>
         </div>
 
-        <nav>
-            <a class="pagina-atual" href="index.html">Início</a>
+        <nav class="navbar">
+            <a href="index.php" class="active">Inicio</a>
             <a href="dashboard.php">Dashboard</a>
 
             <details name="menu-nav">
@@ -41,63 +45,49 @@
     </header>
 
     <main>
-        <section class="box-titulo">
-            <h2>Bem Vindo(a) ao EcoCollect</h2>
-            <p>Uma ferramenta para facilitar a coleta seletiva.</p>
-        </section>
-
-        <section class="nossa-historia">
-            <div class="texto-historia">
-                <h3>Nossa História</h3>
-                <p>Nós da Ambientify lançamos o EcoCollect para facilitar o acesso à coleta seletiva. Por meio desse
-                    sistema, os usuários podem criar e configurar pontos de coleta, junto com os materiais que podem ser
-                    descartados neles, de maneira rápida, natural e intuitiva.</p>
-            </div>
-            <img src="" alt="" class="imagem-historia">
-        </section>
-
-        <section class="nosso-objetivo">
-            <img src="" alt="" class="imagem-objetivo">
-            <div class="texto-objetivo">
-                <h3>Nosso Objetivo</h3>
-                <p>Tornar a coleta seletiva rápida, fácil e efiiente para todas as pessoas, por meio de pontos de coleta
-                    personalizáveis e guias acessíveis, visando um futuro mais limpo e sustentável.</p>
+        <section class="home">
+            <div class="home-content">
+                <h1>Bem-vindo a EcoCollect</h1>
+                <h3>Sua plataforma de coleta seletiva</h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam vitae voluptatibus deserunt alias
+                    tenetur molestias provident tempora, dolor, quidem excepturi quos asperiores laudantium officia.
+                    Culpa illo corrupti doloremque laboriosam ipsum?</p>
+                <div class="btn-box">
+                    <a href="#">Conheça Já</a>
+                    <a href="#">Pontos de Coleta</a>
+                </div>
             </div>
         </section>
 
-        <section class="box-titulo">
-            <h2>Como Funciona?</h2>
-            <p>Saiba mais sobre o nosso programa.</p>
-        </section>
+        <section>
+            <div class="wrapper autoShow">
+                <div class="img-history">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySOOYJkJI1oCP4dRwqUam9GkpM6O9w7mOr6HN4tiACg&s=10"
+                        alt="">
+                </div>
 
-        <section class="funcionamento">
-            <p>O EcoCollect se utiliza de pontos de coleta criados por usuários para facilitar a coleta seletiva. Pontos
-                de coleta são selecionados por responsáveis, e então são avaliados para verificar a viabilidade.</p>
-            <p>Após a aprovação, os pontos são adicionados pela nossa equipe. Para incentivar a coleta seletiva,
-                desenvolvemos um sistema de pontuação de descarte, que funciona com base no material e na quantidade de
-                itens descartados. É simples, vários itens = vários pontos!</p>
-            <a href="" class="botao-link">Orientações de descarte</a>
-        </section>
-
-        <section class="box-titulo">
-            <h2>Como Participar?</h2>
-            <p>Informações sobre como usar a plataforma.</p>
-        </section>
-
-        <section class="participar">
-            <p>Para fazer parte do programa, basta criar uma conta de usuário e localizar pontos de coleta próximos da
-                sua àrea, e então, basta registrar os itens e os materiais descartados para receber seus pontos de
-                coleta.</p>
-            <p>Deseja adicionar um ponto d coleta? Basta criar uma conta de responsável e preencher os formulários na
-                página de cadastro.</p>
-            <a href="" class="botao-link">Cadastre-se</a>
+                <div class="text">
+                    <h2>Nossa Historia</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In illum debitis ipsum reprehenderit
+                        eveniet laudantium impedit illo quaerat dolorem qui? Quis libero enim et modi esse ullam,
+                        temporibus porro rerum saepe vitae facilis vel? Rerum quasi incidunt iste tempore sit quas,
+                        minima exercitationem, sequi soluta unde, nihil consequatur est ex illum quo iure amet nulla!
+                        Earum quisquam minima quos molestias, numquam vitae enim quasi voluptates, reiciendis amet quod
+                        recusandae repellendus soluta dolorem voluptas, error nam modi laudantium maxime ut ipsam
+                        corrupti! Minima esse asperiores explicabo quasi voluptate est ut impedit perspiciatis nesciunt
+                        rerum, nihil debitis quia quidem labore saepe excepturi aliquam enim quo maxime cumque magni!
+                        Molestias ipsam accusantium sint! Architecto recusandae perferendis dicta voluptate! Et
+                        obcaecati ipsam non repudiandae. Cupiditate aperiam voluptatum natus animi, totam, commodi,
+                        officia dolore perferendis mollitia quidem quis iste deserunt ratione minus unde delectus in
+                        maiores sequi voluptate sint cumque. Placeat quo cum at cupiditate repudiandae, dolorum itaque
+                        dolore provident nihil laboriosam. Eligendi sunt vero ut, deleniti aut magnam non quisquam
+                        incidunt! Minus quos quia ex doloremque nobis quod provident et inventore. Dolore labore
+                        incidunt doloribus nostrum aspernatur eligendi ipsam dolorem nulla, provident architecto
+                        consequatur culpa repudiandae harum, sequi unde similique est deleniti? Dicta, modi.</p>
+                </div>
+            </div>
         </section>
     </main>
-
-    <footer>
-        <p>&copy;2026 Ambientify. Todos os direitos reservados</p>
-    </footer>
-
 </body>
 
 </html>
