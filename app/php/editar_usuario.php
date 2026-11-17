@@ -23,7 +23,7 @@ unset($_SESSION['flash_sucesso'], $_SESSION['flash_erro']);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $action = $_POST['action'] ?? '';
 
-    if ($action === 'atualizar_perfil') {
+    if ($action == 'atualizar_perfil') {
         $nome = trim($_POST['nome'] ?? '');
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $telefone = trim($_POST['telefone'] ?? '');
@@ -31,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (!empty($nome) && $email && !empty($telefone)) {
             try {
-                // Verifica se o e-mail já pertence a outro usuário
                 $emailEmUso = read($pdo, "Usuarios", "email = ? AND id != ?", [$email, $idUsuarioLogado]);
 
                 if ($emailEmUso) {
@@ -51,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     $_SESSION['usuario_nome'] = $nome;
                     $_SESSION['flash_sucesso'] = "Informações do perfil atualizadas com sucesso!";
-                    header("Location: editarPerfil.php");
+                    header("Location: editar_usuario.php");
                     exit;
                 }
             } catch (PDOException $e) {
@@ -62,11 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    if ($action === 'excluir_perfil') {
+    if ($action == 'excluir_perfil') {
         try {
             $pdo->beginTransaction();
 
-            // Remove as coletas vinculadas ao usuário antes de apagar o registro
             delete($pdo, "Coleta", "idUsuario = ?", [$idUsuarioLogado]);
             delete($pdo, "Usuarios", "id = ?", [$idUsuarioLogado]);
 
@@ -105,13 +103,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <nav>
             <a href="index.php">Início</a>
             <a href="dashboard.php">Dashboard</a>
+            <a href="loja.php">Loja</a>
 
             <details name="menu-nav">
                 <summary>Cadastro</summary>
                 <div class="sub-menu">
                     <a href="cadastro_usuario.php">Usuário</a>
                     <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
-                    <a href="">Campanha</a>
+                    <a href="cadastro_campanha.php">Campanha</a>
                 </div>
             </details>
 
@@ -119,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <summary>Coletas</summary>
                 <div class="sub-menu menu-direita">
                     <a href="">Orientações de Descarte</a>
-                    <a href="">Campanhas de Descarte</a>
+                    <a href="campanhas.php">Campanhas de Descarte</a>
                     <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
                 </div>
             </details>
@@ -147,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <section class="card-box">
                 <h3 class="box-subtitulo">Editar Informações do Perfil</h3>
-                <form method="POST" action="editarPerfil.php" class="form-coleta">
+                <form method="POST" action="editar_usuario.php" class="form-coleta">
                     <input type="hidden" name="action" value="atualizar_perfil">
 
                     <div class="form-group">
@@ -177,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <section class="card-box danger-zone">
                 <h3 class="box-subtitulo">Excluir Conta</h3>
                 <p>Ao excluir seu perfil, todos os seus dados cadastrais, histórico de coletas e pontos acumulados serão removidos permanentemente. Esta ação não pode ser desfeita.</p>
-                <form method="POST" action="editarPerfil.php" onsubmit="return confirm('Tem certeza que deseja excluir permanentemente seu perfil e todo o seu histórico de coletas?');">
+                <form method="POST" action="editar_usuario.php" onsubmit="return confirm('Tem certeza que deseja excluir permanentemente seu perfil e todo o seu histórico de coletas?');">
                     <input type="hidden" name="action" value="excluir_perfil">
                     <button type="submit" class="btn-danger">Excluir Meu Perfil</button>
                 </form>

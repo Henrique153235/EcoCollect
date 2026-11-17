@@ -12,7 +12,7 @@ $idUsuarioLogado = (int) $_SESSION['usuario_id'];
 $usuarioLogado = read($pdo, "Usuarios", "id = ?", [$idUsuarioLogado]);
 
 if (!$usuarioLogado) {
-    $usuarioLogado = ['id' => $idUsuarioLogado, 'nome' => 'Usuário EcoCollect', 'email' => 'usuario@ecocollect.com'];
+    $usuarioLogado = ['id' => $idUsuarioLogado, 'nome' => 'Usuário EcoCollect', 'email' => 'usuario@ecocollect.com', 'saldoPontos' => 0.00];
 }
 
 $mensagemSucesso = $_SESSION['flash_sucesso'] ?? "";
@@ -33,6 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
                 $valorUnidade = (float) $materialInfo['valorUnidade'];
                 $pontuacaoCalculada = $quantidade * $valorUnidade;
 
+                $pdo->beginTransaction();
+
                 create($pdo, "Coleta", [
                     'idPonto' => $idPonto,
                     'idMaterial' => $idMaterial,
@@ -41,6 +43,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
                     'pontuacao' => $pontuacaoCalculada,
                 ]);
 
+                $stmtSaldo = $pdo->prepare("UPDATE Usuarios SET saldoPontos = saldoPontos + :pontos WHERE id = :id");
+                $stmtSaldo->execute([
+                    ':pontos' => $pontuacaoCalculada,
+                    ':id'     => $idUsuarioLogado,
+                ]);
+
+                $pdo->commit();
+
                 $_SESSION['flash_sucesso'] = "Coleta registrada com sucesso! Você acumulou " . number_format($pontuacaoCalculada, 2, ',', '.') . " pontos.";
                 header("Location: dashboard.php");
                 exit;
@@ -48,6 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
                 $mensagemErro = "O material selecionado não é aceito por este ponto de coleta.";
             }
         } catch (PDOException $e) {
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
             $mensagemErro = "Erro ao registrar coleta: " . $e->getMessage();
         }
     } else {
@@ -58,6 +71,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
 $stmtStats = $pdo->prepare("SELECT COUNT(id) AS totalColetas, COALESCE(SUM(pontuacao), 0) AS totalPontos FROM Coleta WHERE idUsuario = :id");
 $stmtStats->execute([':id' => $idUsuarioLogado]);
 $estatisticas = $stmtStats->fetch(PDO::FETCH_ASSOC);
+
+try {
+    $rankingCompleto = readAll($pdo, "ViewRankingUsuarios");
+} catch (PDOException $e) {
+    $stmtRank = $pdo->query("
+        SELECT
+            u.id,
+            u.nome,
+            COUNT(c.id) AS totalColetas,
+            COALESCE(SUM(c.pontuacao), 0.00) AS totalPontos
+        FROM Usuarios u
+        LEFT JOIN Coleta c ON u.id = c.idUsuario
+        GROUP BY u.id, u.nome
+        ORDER BY totalPontos DESC, totalColetas DESC, u.nome ASC
+    ");
+    $rankingCompleto = $stmtRank->fetchAll(PDO::FETCH_ASSOC);
+}
+$rankingTop10 = array_slice($rankingCompleto, 0, 10);
+$posicaoUsuario = null;
+
+foreach ($rankingCompleto as $indice => $participante) {
+    if ((int) $participante['id'] === $idUsuarioLogado) {
+        $posicaoUsuario = $indice + 1;
+        break;
+    }
+}
 
 $stmtHistorico = $pdo->prepare("
     SELECT 
@@ -178,6 +217,11 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                     <span class="stat-label">Pontos Acumulados</span>
                 </div>
                 <div class="stat-card">
+                    <span class="stat-value"><?= number_format((float) ($usuarioLogado['saldoPontos'] ?? 0), 2, ',', '.') ?></span>
+                    <span class="stat-label">Saldo para Brindes</span>
+                    <a href="loja.php" class="stat-link">Ir para Loja →</a>
+                </div>
+                <div class="stat-card">
                     <span class="stat-value"><?= (int)$estatisticas['totalColetas'] ?></span>
                     <span class="stat-label">Coletas Realizadas</span>
                 </div>
@@ -205,7 +249,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                             <option value="">Selecione o ponto:</option>
                             <?php foreach ($pontosDisponiveis as $ponto): ?>
                                 <?php $cep_fmt = (strlen($ponto['cep']) == 8) ? substr($ponto['cep'], 0, 5) . '-' . substr($ponto['cep'], 5) : $ponto['cep']; ?>
-                                <option value="<?= $ponto['id'] ?>">Ponto #<?= $ponto['id'] ?> - CEP <?= htmlspecialchars($cep_fmt) ?></option>
+                                <option value="<?= $ponto['id'] ?>">Ponto #<?= $ponto['id'] ?> — CEP <?= htmlspecialchars($cep_fmt) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -265,6 +309,59 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
             </section>
 
         </div>
+
+        <section class="card-box ranking-section">
+            <div class="ranking-header">
+                <h3 class="box-subtitulo">Ranking de Recicladores (Top 10)</h3>
+                <?php if ($posicaoUsuario !== null): ?>
+                    <span class="badge-posicao">Sua posição: #<?= $posicaoUsuario ?> de <?= count($rankingCompleto) ?></span>
+                <?php endif; ?>
+            </div>
+
+            <?php if (empty($rankingTop10)): ?>
+                <p class="empty-state">Nenhum usuário pontuou no ranking ainda.</p>
+            <?php else: ?>
+                <div class="table-responsive">
+                    <table class="tabela-historico tabela-ranking">
+                        <thead>
+                            <tr>
+                                <th class="col-pos">Posição</th>
+                                <th>Reciclador(a)</th>
+                                <th>Coletas</th>
+                                <th>Pontuação Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($rankingTop10 as $idx => $rankUser): ?>
+                                <?php
+                                    $posicao = $idx + 1;
+                                    $ehUsuarioAtual = ((int) $rankUser['id'] === $idUsuarioLogado);
+                                    $classePodio = match ($posicao) {
+                                        1 => 'podio-ouro',
+                                        2 => 'podio-prata',
+                                        3 => 'podio-bronze',
+                                        default => '',
+                                    };
+                                ?>
+                                <tr class="<?= $ehUsuarioAtual ? 'linha-usuario-atual' : '' ?>">
+                                    <td class="col-pos">
+                                        <span class="rank-badge <?= $classePodio ?>"><?= $posicao ?>º</span>
+                                    </td>
+                                    <td>
+                                        <?= htmlspecialchars($rankUser['nome']) ?>
+                                        <?php if ($ehUsuarioAtual): ?>
+                                            <span class="tag-voce">Você</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= (int) $rankUser['totalColetas'] ?></td>
+                                    <td class="col-pontos"><?= number_format((float) $rankUser['totalPontos'], 2, ',', '.') ?> pts</td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
+        </section>
 
         <section class="dashboard-container" style="margin-top: 2rem;">
             <div class="dashboard-header">
