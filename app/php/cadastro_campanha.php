@@ -37,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') == 'cadastr
     $dtInicio = DateTime::createFromFormat('Y-m-d', $dataInicioForm);
     $dtFim = DateTime::createFromFormat('Y-m-d', $dataFimForm);
     $datasValidas = ($dtInicio && $dtInicio->format('Y-m-d') == $dataInicioForm)
-                 && ($dtFim && $dtFim->format('Y-m-d') == $dataFimForm);
+        && ($dtFim && $dtFim->format('Y-m-d') == $dataFimForm);
 
-    if ($tituloForm == '' || mb_strlen($tituloForm) > 120) {
+    if ($tituloForm == '' || strlen($tituloForm) > 120) {
         $mensagemErro = "Informe um título válido para a campanha (máximo de 120 caracteres).";
     } elseif ($descricaoForm == '') {
         $mensagemErro = "Informe a descrição e as orientações da campanha.";
@@ -177,8 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') == 'cadastr
                         maxlength="120"
                         placeholder="Ex: Mutirão de Reciclagem de Eletrônicos do Bairro"
                         value="<?= htmlspecialchars($tituloForm) ?>"
-                        required
-                    >
+                        required>
                 </div>
 
                 <div class="form-row-2col">
@@ -189,8 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') == 'cadastr
                             id="dataInicio"
                             name="dataInicio"
                             value="<?= htmlspecialchars($dataInicioForm) ?>"
-                            required
-                        >
+                            required>
                     </div>
 
                     <div class="form-group">
@@ -200,8 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') == 'cadastr
                             id="dataFim"
                             name="dataFim"
                             value="<?= htmlspecialchars($dataFimForm) ?>"
-                            required
-                        >
+                            required>
                     </div>
                 </div>
 
@@ -229,8 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') == 'cadastr
                                     type="checkbox"
                                     name="materiais[]"
                                     value="<?= (int) $mat['id'] ?>"
-                                    <?= $checked ? 'checked' : '' ?>
-                                >
+                                    <?= $checked ? 'checked' : '' ?>>
                                 <span><?= htmlspecialchars(ucfirst($mat['tipo'])) ?></span>
                             </label>
                         <?php endforeach; ?>
@@ -244,8 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') == 'cadastr
                         name="descricao"
                         rows="5"
                         placeholder="Descreva os horários de atendimento, ponto de encontro, metas da campanha e como preparar os materiais para entrega..."
-                        required
-                    ><?= htmlspecialchars($descricaoForm) ?></textarea>
+                        required><?= htmlspecialchars($descricaoForm) ?></textarea>
                 </div>
 
                 <div class="form-actions">
