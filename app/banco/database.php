@@ -9,7 +9,7 @@ function database(): PDO
     if ($connection instanceof PDO) {
         return $connection;
     }
-
+    
     $host = getenv('DB_HOST') ?: 'localhost';
     $port = getenv('DB_PORT') ?: '3309';
     $database = getenv('DB_DATABASE') ?: 'EcoCollect';
