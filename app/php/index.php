@@ -172,8 +172,8 @@ try {
                 </div>
 
                 <div class="btn-participa">
-                    <a href="cadastro_usuario.php">Fazer Login</a>
-                    <a href="visualizacao_ponto">Cadastrar-se</a>
+                    <a href="./login_usuario.php">Fazer Login</a>
+                    <a href="./cadastro_usuario.php">Cadastrar-se</a>
                 </div>
             </div>
         </section>
