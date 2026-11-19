@@ -70,8 +70,8 @@ try {
                 <h3>Sua plataforma de coleta seletiva</h3>
                 <p>Encontre pontos de descarte próximos, registre suas coletas e acumule pontos contribuindo para um meio ambiente mais limpo e sustentável.</p>
                 <div class="btn-box">
-                    <a href="./login_usuario.php">Login</a>
-                    <a href="./cadastro_usuario.php">Cadastrar-se</a>
+                    <a href="login_usuario.php">Login</a>
+                    <a href="cadastro_usuario.php">Cadastrar-se</a>
                 </div>
             </div>
 
