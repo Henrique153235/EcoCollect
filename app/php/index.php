@@ -42,13 +42,14 @@ try {
         <nav class="navbar">
             <a href="index.php" class="active">Inicio</a>
             <a href="dashboard.php">Dashboard</a>
+            <a href="loja.php">Loja</a>
 
             <div class="menu-item">
                 <span>Cadastro</span>
                 <div class="sub-menu">
                     <a href="cadastro_usuario.php">Usuário</a>
                     <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
-                    <a href="">Campanha</a>
+                    <a href="cadastro_campanha.php">Campanha</a>
                 </div>
             </div>
 
