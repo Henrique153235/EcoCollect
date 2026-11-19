@@ -12,7 +12,7 @@ $campanhasAtivas = 0;
 try {
     $pdo = database();
 
-    $totalColetado = (float) $pdo->query("SELECT COALESCE(SUM(quantidadeColetada), 0) FROM Coleta")->fetchColumn();
+    $totalColetado = (float)$pdo->query("SELECT COALESCE(SUM(quantidadeColetada), 0) FROM Coleta")->fetchColumn();
     $totalUsuarios = count(readAll($pdo, 'Usuarios'));
     $totalPontos = count(readAll($pdo, 'PontosDeColeta', 'status = ?', ['disponivel']));
     $campanhasAtivas = count(readAll($pdo, 'Campanha', 'CURDATE() BETWEEN dataInicio AND dataFim'));
@@ -43,23 +43,23 @@ try {
             <a href="index.php" class="active">Inicio</a>
             <a href="dashboard.php">Dashboard</a>
 
-            <details name="menu-nav">
-                <summary>Cadastro</summary>
+            <div class="menu-item">
+                <span>Cadastro</span>
                 <div class="sub-menu">
                     <a href="cadastro_usuario.php">Usuário</a>
                     <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
                     <a href="">Campanha</a>
                 </div>
-            </details>
+            </div>
 
-            <details name="menu-nav">
-                <summary>Coletas</summary>
+            <div class="menu-item">
+                <span>Coletas</span>
                 <div class="sub-menu menu-direita">
                     <a href="">Orientações de Descarte</a>
                     <a href="">Campanhas de Descarte</a>
-                    <a href="visualizacao_ponto">Pontos de Coleta Próximos</a>
+                    <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
                 </div>
-            </details>
+            </div>
         </nav>
     </header>
 
@@ -68,12 +68,10 @@ try {
             <div class="home-content">
                 <h1>Bem-vindo a EcoCollect!</h1>
                 <h3>Sua plataforma de coleta seletiva</h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam vitae voluptatibus deserunt alias
-                    tenetur molestias provident tempora, dolor, quidem excepturi quos asperiores laudantium officia.
-                    Culpa illo corrupti doloremque laboriosam ipsum?</p>
+                <p>Encontre pontos de descarte próximos, registre suas coletas e acumule pontos contribuindo para um meio ambiente mais limpo e sustentável.</p>
                 <div class="btn-box">
-                    <a href="#como-participar">Login</a>
-                    <a href="#como-participar">Cadastrar-se</a>
+                    <a href="./login_usuario.php">Login</a>
+                    <a href="./cadastro_usuario.php">Cadastrar-se</a>
                 </div>
             </div>
 
@@ -110,56 +108,24 @@ try {
             <div class="wrapper autoShow">
                 <div class="img-history">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySOOYJkJI1oCP4dRwqUam9GkpM6O9w7mOr6HN4tiACg&s=10"
-                        alt="">
+                        alt="Nossa História">
                 </div>
 
                 <div class="text">
-                    <h2>Nossa Historia</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In illum debitis ipsum reprehenderit
-                        eveniet laudantium impedit illo quaerat dolorem qui? Quis libero enim et modi esse ullam,
-                        temporibus porro rerum saepe vitae facilis vel? Rerum quasi incidunt iste tempore sit quas,
-                        minima exercitationem, sequi soluta unde, nihil consequatur est ex illum quo iure amet nulla!
-                        Earum quisquam minima quos molestias, numquam vitae enim quasi voluptates, reiciendis amet quod
-                        recusandae repellendus soluta dolorem voluptas, error nam modi laudantium maxime ut ipsam
-                        corrupti! Minima esse asperiores explicabo quasi voluptate est ut impedit perspiciatis nesciunt
-                        rerum, nihil debitis quia quidem labore saepe excepturi aliquam enim quo maxime cumque magni!
-                        Molestias ipsam accusantium sint! Architecto recusandae perferendis dicta voluptate! Et
-                        obcaecati ipsam non repudiandae. Cupiditate aperiam voluptatum natus animi, totam, commodi,
-                        officia dolore perferendis mollitia quidem quis iste deserunt ratione minus unde delectus in
-                        maiores sequi voluptate sint cumque. Placeat quo cum at cupiditate repudiandae, dolorum itaque
-                        dolore provident nihil laboriosam. Eligendi sunt vero ut, deleniti aut magnam non quisquam
-                        incidunt! Minus quos quia ex doloremque nobis quod provident et inventore. Dolore labore
-                        incidunt doloribus nostrum aspernatur eligendi ipsam dolorem nulla, provident architecto
-                        consequatur culpa repudiandae harum, sequi unde similique est deleniti? Dicta, modi.</p>
+                    <h2>Nossa História</h2>
+                    <p>O EcoCollect nasceu dentro da Ambientify a partir de uma dúvida simples: por que descartar resíduos recicláveis corretamente ainda dá tanto trabalho no dia a dia? Muitas vezes, o problema não é a falta de vontade das pessoas, mas a dificuldade de encontrar informações claras e atualizadas sobre onde levar cada tipo de material. Vendo essa barreira de perto, decidimos criar uma plataforma colaborativa em que qualquer usuário ou responsável pode cadastrar, organizar e configurar pontos de coleta, definindo exatamente quais resíduos são aceitos em cada endereço e mantendo o status de disponibilidade sempre visível. Tudo isso foi pensado para funcionar de maneira rápida, intuitiva e acessível, aproximando quem quer descartar dos pontos que realmente recebem aquele material e fortalecendo a reciclagem na comunidade.</p>
                 </div>
-
-
             </div>
 
             <div class="wrapper-right autoShow">
                 <div class="img-objective">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySOOYJkJI1oCP4dRwqUam9GkpM6O9w7mOr6HN4tiACg&s=10"
-                        alt="">
+                        alt="Nosso Objetivo">
                 </div>
 
                 <div class="text-right">
-                    <h2>Nossa Missão</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In illum debitis ipsum reprehenderit
-                        eveniet laudantium impedit illo quaerat dolorem qui? Quis libero enim et modi esse ullam,
-                        temporibus porro rerum saepe vitae facilis vel? Rerum quasi incidunt iste tempore sit quas,
-                        minima exercitationem, sequi soluta unde, nihil consequatur est ex illum quo iure amet nulla!
-                        Earum quisquam minima quos molestias, numquam vitae enim quasi voluptates, reiciendis amet quod
-                        recusandae repellendus soluta dolorem voluptas, error nam modi laudantium maxime ut ipsam
-                        corrupti! Minima esse asperiores explicabo quasi voluptate est ut impedit perspiciatis nesciunt
-                        rerum, nihil debitis quia quidem labore saepe excepturi aliquam enim quo maxime cumque magni!
-                        Molestias ipsam accusantium sint! Architecto recusandae perferendis dicta voluptate! Et
-                        obcaecati ipsam non repudiandae. Cupiditate aperiam voluptatum natus animi, totam, commodi,
-                        officia dolore perferendis mollitia quidem quis iste deserunt ratione minus unde delectus in
-                        maiores sequi voluptate sint cumque. Placeat quo cum at cupiditate repudiandae, dolorum itaque
-                        dolore provident nihil laboriosam. Eligendi sunt vero ut, deleniti aut magnam non quisquam
-                        incidunt! Minus quos quia ex doloremque nobis quod provident et inventore. Dolore labore
-                        incidunt doloribus nostrum aspernatur eligendi ipsam dolorem nulla, provident architecto
-                        consequatur culpa repudiandae harum, sequi unde similique est deleniti? Dicta, modi.</p>
+                    <h2>Nosso Objetivo</h2>
+                    <p>Nosso objetivo é tornar a coleta seletiva rápida, fácil e eficiente na rotina de todas as pessoas, transformando o descarte consciente em um hábito simples e acessível. Queremos acabar de vez com a dúvida na hora de separar o lixo, oferecendo pontos de coleta personalizáveis, informações transparentes sobre os materiais aceitos e orientações práticas para cada tipo de resíduo. Além disso, buscamos incentivar a participação ativa por meio do acompanhamento de resultados e campanhas de descarte, conectando moradores, responsáveis e iniciativas ambientais em uma mesma rede. Com tecnologia simples e colaboração direta, queremos aumentar o volume de materiais reciclados e contribuir para cidades mais limpas, organizadas e sustentáveis.</p>
                 </div>
             </div>
         </section>
@@ -168,19 +134,14 @@ try {
             <div class="Como-Participar-box autoHide">
                 <div class="Como-partipipar-content">
                     <h2>Como Participar?</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus blanditiis expedita beatae dolorem velit eius dicta omnis quasi rem voluptas quo, alias, tenetur delectus? Soluta, molestiae? Nobis optio sed, consectetur reiciendis error aperiam soluta qui eius provident culpa sit ullam. Consequatur saepe rerum nostrum est corporis, accusantium recusandae impedit eos, dolore perferendis consequuntur corrupti aliquid a temporibus. Repellendus tenetur hic, error eaque ducimus aut laudantium iusto, dolor numquam soluta, explicabo voluptates nostrum placeat aperiam pariatur voluptate mollitia? Nesciunt officia obcaecati molestias a iure suscipit necessitatibus, voluptas quaerat? Nemo natus laboriosam hic, saepe consequuntur quos eius iure maiores reiciendis accusantium harum nostrum placeat! Totam voluptates quas a, eaque autem eum possimus hic cumque corporis sapiente quia aspernatur. Nisi iure quae dicta unde sed quas dignissimos, natus rerum ipsa tempore necessitatibus qui delectus dolorum temporibus vitae eaque molestias, laudantium quasi quidem commodi sapiente cupiditate consequatur velit animi? Eaque fugit ipsum, voluptate, fugiat tempore hic veniam repellendus nostrum vero dolores animi delectus, alias sint repellat possimus. Quidem praesentium nemo, maiores veniam necessitatibus ab corrupti sed molestiae numquam non nihil asperiores blanditiis suscipit, iure ipsam error labore, incidunt temporibus dignissimos quaerat. Corrupti officiis aliquid eveniet blanditiis numquam non nostrum cumque perspiciatis explicabo, dolores inventore.</p>
-                </div>
-
-                <div class="btn-participa">
-                    <a href="./login_usuario.php">Fazer Login</a>
-                    <a href="./cadastro_usuario.php">Cadastrar-se</a>
+                    <p>Participar do EcoCollect é simples, gratuito e funciona de forma totalmente colaborativa. A plataforma utiliza pontos de coleta sugeridos pelos próprios usuários para ampliar o alcance da reciclagem na cidade e facilitar o acesso aos locais de descarte. Sempre que um novo ponto é cadastrado no sistema, nossa equipe de responsáveis analisa as informações enviadas e avalia a viabilidade do endereço e dos materiais indicados; após a aprovação, o ponto é ativado e passa a aparecer no mapa e nas listagens para toda a comunidade. Além disso, para incentivar o descarte consciente no dia a dia e reconhecer quem faz a sua parte, criamos um sistema de pontuação que calcula seus pontos automaticamente com base no tipo de material e na quantidade de itens descartados. Assim, você acompanha sua evolução, participa de campanhas ativas e ajuda a manter a cidade mais limpa. É simples: quanto mais você recicla, mais pontos acumula!</p>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="box-footer">
-        <div class="content-footer">
+        <div class="content-footer autoHide">
             <div class="footer-col">
                 <h2>EcoCollect</h2>
                 <span>by Ambientify</span>
@@ -188,19 +149,18 @@ try {
             </div>
 
             <div class="footer-col">
-                <h3>Navegação</h3>
-                <a href="index.php">Início</a>
-                <a href="dashboard.php">Dashboard</a>
+                <h3>Orientações</h3>
                 <a href="visualizacao_ponto">Pontos de Coleta Próximos</a>
                 <a href="">Orientações de Descarte</a>
                 <a href="">Campanhas de Descarte</a>
             </div>
 
             <div class="footer-col">
-                <h3>Cadastros</h3>
-                <a href="cadastro_usuario.php">Cadastrar Usuário</a>
-                <a href="cadastro_ponto_coleta.php">Cadastrar Ponto de Coleta</a>
-                <a href="">Cadastrar Campanha</a>
+                <h3>Instituições</h3>
+                <a href="https://cempre.org.br/" target="_blank" rel="noopener noreferrer">CEMPRE - Compromisso Empresarial para Reciclagem</a>
+                <a href="https://www.reciclasampa.com.br/" target="_blank" rel="noopener noreferrer">Recicla Sampa</a>
+                <a href="https://ambipar.com/" target="_blank" rel="noopener noreferrer">Ambipar Group</a>
+                <a href="https://www.eureciclo.com.br/" target="_blank" rel="noopener noreferrer">eureciclo</a>
             </div>
 
             <div class="footer-col">

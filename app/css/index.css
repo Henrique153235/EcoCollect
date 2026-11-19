@@ -42,13 +42,6 @@ body {
     border-bottom: 2px solid var(--verde-folha);
 }
 
-.logo {
-    font-size: 18px;
-    color: var(--branco-suave);
-    text-decoration: none;
-    font-weight: 500;
-}
-
 .navbar {
     display: flex;
     flex-wrap: wrap;
@@ -57,32 +50,23 @@ body {
 }
 
 .navbar a,
-.navbar summary {
+.navbar .menu-item span {
     font-size: 18px;
     color: var(--branco-suave);
     text-decoration: none;
     font-weight: 500;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .navbar a:hover,
 .navbar a.active,
-.navbar summary:hover,
-.navbar details[open] summary {
+.navbar .menu-item:hover span {
     color: var(--verde-folha);
 }
 
-.navbar details {
+.menu-item {
     position: relative;
-}
-
-.navbar summary {
-    list-style: none;
-    cursor: pointer;
-}
-
-.navbar summary::-webkit-details-marker {
-    display: none;
 }
 
 .sub-menu {
@@ -94,9 +78,22 @@ body {
     border-radius: 8px;
     padding: 8px 0;
     min-width: 230px;
-    display: flex;
+    display: none;
     flex-direction: column;
     z-index: 1000;
+}
+
+.sub-menu::before {
+    content: "";
+    position: absolute;
+    top: -16px;
+    left: 0;
+    width: 100%;
+    height: 16px;
+}
+
+.menu-item:hover .sub-menu {
+    display: flex;
 }
 
 .sub-menu.menu-direita {
@@ -109,6 +106,14 @@ body {
     font-size: 16px;
     white-space: nowrap;
 }
+
+.logo {
+    font-size: 18px;
+    color: var(--branco-suave);
+    text-decoration: none;
+    font-weight: 500;
+}
+
 
 .home {
     min-height: 100vh;
@@ -348,93 +353,33 @@ body {
 }
 
 .Como-Participar-box {
-    min-height: 60vh;
+    min-height: 45vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 30px;
+    align-items: flex-start;
     padding: 40px 5%;
     margin-bottom: 80px;
 }
 
 .Como-partipipar-content {
     width: 100%;
+    max-width: 900px;
 }
 
 .Como-partipipar-content h2 {
     font-size: 45px;
     color: var(--verde-folha);
     line-height: 1.3;
-    text-align: center;
+    text-align: left;
+    margin-bottom: 15px;
 }
 
 .Como-partipipar-content p {
     font-size: 16px;
-    margin: 20px auto;
-    max-width: 900px;
     line-height: 1.5;
     text-align: justify;
-}
-
-.btn-participa {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
-}
-
-.btn-participa a {
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--verde-oliva);
-    border: 2px solid var(--verde-oliva);
-    border-radius: 8px;
-    font-size: 18px;
     color: var(--branco-suave);
-    text-decoration: none;
-    font-weight: 500;
-    letter-spacing: 1px;
-    padding: 12px 24px;
-    z-index: 1;
-    overflow: hidden;
-    transition: 0.5s;
-}
-
-.btn-participa a:hover {
-    color: var(--verde-folha);
-}
-
-.btn-participa a:nth-child(2) {
-    background-color: transparent;
-    color: var(--verde-folha);
-}
-
-.btn-participa a:nth-child(2):hover {
-    color: var(--branco-suave);
-}
-
-.btn-participa a:nth-child(2)::before {
-    background: var(--verde-oliva);
-}
-
-.btn-participa a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: var(--verde-escuro);
-    z-index: -1;
-    transition: 0.5s;
-}
-
-.btn-participa a:hover::before {
-    width: 100%;
 }
 
 .box-footer {
