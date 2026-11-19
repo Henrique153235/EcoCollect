@@ -1,110 +1,180 @@
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/init.php';
+
+$totalColetado = 0.0;
+$totalUsuarios = 0;
+$totalPontos = 0;
+$campanhasAtivas = 0;
+
+try {
+    $pdo = database();
+
+    $totalColetado = (float)$pdo->query("SELECT COALESCE(SUM(quantidadeColetada), 0) FROM Coleta")->fetchColumn();
+    $totalUsuarios = count(readAll($pdo, 'Usuarios'));
+    $totalPontos = count(readAll($pdo, 'PontosDeColeta', 'status = ?', ['disponivel']));
+    $campanhasAtivas = count(readAll($pdo, 'Campanha', 'CURDATE() BETWEEN dataInicio AND dataFim'));
+} catch (Throwable $e) {
+    // Mantém os indicadores zerados caso ocorra falha de conexão
+}
+?>
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início | EcoCollect</title>
+    <title>EcoCollect | Inicio</title>
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body>
-
-    <header>
-        <div class="nome-projeto">
+    <header class="header">
+        <div class="logo">
             <h1>EcoCollect</h1>
             <h3>by Ambientify</h3>
         </div>
 
-        <nav>
-            <a class="pagina-atual" href="index.html">Início</a>
+        <nav class="navbar">
+            <a href="index.php" class="active">Inicio</a>
             <a href="dashboard.php">Dashboard</a>
             <a href="loja.php">Loja</a>
 
-            <details name="menu-nav">
-                <summary>Cadastro</summary>
+            <div class="menu-item">
+                <span>Cadastro</span>
                 <div class="sub-menu">
                     <a href="cadastro_usuario.php">Usuário</a>
                     <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
                     <a href="cadastro_campanha.php">Campanha</a>
                 </div>
-            </details>
+            </div>
 
-            <details name="menu-nav">
-                <summary>Coletas</summary>
+            <div class="menu-item">
+                <span>Coletas</span>
                 <div class="sub-menu menu-direita">
                     <a href="">Orientações de Descarte</a>
-                    <a href="campanhas.php">Campanhas de Descarte</a>
-                    <a href="visualizacao_ponto">Pontos de Coleta Próximos</a>
+                    <a href="">Campanhas de Descarte</a>
+                    <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
                 </div>
-            </details>
-
-            <details name="menu-nav">
-                <summary>Perfil</summary>
-                <div class="sub-menu menu-perfil">
-                    <a href="editar_usuario.php">Editar Perfil</a>
-                    <a href="logout.php">Sair</a>
-                </div>
-            </details>
+            </div>
         </nav>
     </header>
 
     <main>
-        <section class="box-titulo">
-            <h2>Bem Vindo(a) ao EcoCollect</h2>
-            <p>Uma ferramenta para facilitar a coleta seletiva.</p>
-        </section>
-
-        <section class="nossa-historia">
-            <div class="texto-historia">
-                <h3>Nossa História</h3>
-                <p>Nós da Ambientify lançamos o EcoCollect para facilitar o acesso à coleta seletiva. Por meio desse
-                    sistema, os usuários podem criar e configurar pontos de coleta, junto com os materiais que podem ser
-                    descartados neles, de maneira rápida, natural e intuitiva.</p>
+        <section class="home autoHide">
+            <div class="home-content">
+                <h1>Bem-vindo a EcoCollect!</h1>
+                <h3>Sua plataforma de coleta seletiva</h3>
+                <p>Encontre pontos de descarte próximos, registre suas coletas e acumule pontos contribuindo para um meio ambiente mais limpo e sustentável.</p>
+                <div class="btn-box">
+                    <a href="./login_usuario.php">Login</a>
+                    <a href="./cadastro_usuario.php">Cadastrar-se</a>
+                </div>
             </div>
-            <img src="" alt="" class="imagem-historia">
-        </section>
 
-        <section class="nosso-objetivo">
-            <img src="" alt="" class="imagem-objetivo">
-            <div class="texto-objetivo">
-                <h3>Nosso Objetivo</h3>
-                <p>Tornar a coleta seletiva rápida, fácil e efiiente para todas as pessoas, por meio de pontos de coleta
-                    personalizáveis e guias acessíveis, visando um futuro mais limpo e sustentável.</p>
+            <div class="box-estatisticas">
+                <div class="box-grid">
+                    <div class="box">
+                        <i class="fa-solid fa-recycle"></i>
+                        <span class="numero-estatistica"><?= number_format($totalColetado, 1, ',', '.') ?> kg</span>
+                        <h3>Total Coletado</h3>
+                    </div>
+
+                    <div class="box">
+                        <i class="fa-solid fa-users"></i>
+                        <span class="numero-estatistica"><?= number_format($totalUsuarios, 0, ',', '.') ?></span>
+                        <h3>Usuários Cadastrados</h3>
+                    </div>
+
+                    <div class="box">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span class="numero-estatistica"><?= number_format($totalPontos, 0, ',', '.') ?></span>
+                        <h3>Pontos de Coleta</h3>
+                    </div>
+
+                    <div class="box">
+                        <i class="fa-solid fa-bullhorn"></i>
+                        <span class="numero-estatistica"><?= number_format($campanhasAtivas, 0, ',', '.') ?></span>
+                        <h3>Campanhas Ativas</h3>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="box-titulo">
-            <h2>Como Funciona?</h2>
-            <p>Saiba mais sobre o nosso programa.</p>
+        <section>
+            <div class="wrapper autoShow">
+                <div class="img-history">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySOOYJkJI1oCP4dRwqUam9GkpM6O9w7mOr6HN4tiACg&s=10"
+                        alt="Nossa História">
+                </div>
+
+                <div class="text">
+                    <h2>Nossa História</h2>
+                    <p>O EcoCollect nasceu dentro da Ambientify a partir de uma dúvida simples: por que descartar resíduos recicláveis corretamente ainda dá tanto trabalho no dia a dia? Muitas vezes, o problema não é a falta de vontade das pessoas, mas a dificuldade de encontrar informações claras e atualizadas sobre onde levar cada tipo de material. Vendo essa barreira de perto, decidimos criar uma plataforma colaborativa em que qualquer usuário ou responsável pode cadastrar, organizar e configurar pontos de coleta, definindo exatamente quais resíduos são aceitos em cada endereço e mantendo o status de disponibilidade sempre visível. Tudo isso foi pensado para funcionar de maneira rápida, intuitiva e acessível, aproximando quem quer descartar dos pontos que realmente recebem aquele material e fortalecendo a reciclagem na comunidade.</p>
+                </div>
+            </div>
+
+            <div class="wrapper-right autoShow">
+                <div class="img-objective">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySOOYJkJI1oCP4dRwqUam9GkpM6O9w7mOr6HN4tiACg&s=10"
+                        alt="Nosso Objetivo">
+                </div>
+
+                <div class="text-right">
+                    <h2>Nosso Objetivo</h2>
+                    <p>Nosso objetivo é tornar a coleta seletiva rápida, fácil e eficiente na rotina de todas as pessoas, transformando o descarte consciente em um hábito simples e acessível. Queremos acabar de vez com a dúvida na hora de separar o lixo, oferecendo pontos de coleta personalizáveis, informações transparentes sobre os materiais aceitos e orientações práticas para cada tipo de resíduo. Além disso, buscamos incentivar a participação ativa por meio do acompanhamento de resultados e campanhas de descarte, conectando moradores, responsáveis e iniciativas ambientais em uma mesma rede. Com tecnologia simples e colaboração direta, queremos aumentar o volume de materiais reciclados e contribuir para cidades mais limpas, organizadas e sustentáveis.</p>
+                </div>
+            </div>
         </section>
 
-        <section class="funcionamento">
-            <p>O EcoCollect se utiliza de pontos de coleta criados por usuários para facilitar a coleta seletiva. Pontos
-                de coleta são selecionados por responsáveis, e então são avaliados para verificar a viabilidade.</p>
-            <p>Após a aprovação, os pontos são adicionados pela nossa equipe. Para incentivar a coleta seletiva,
-                desenvolvemos um sistema de pontuação de descarte, que funciona com base no material e na quantidade de
-                itens descartados. É simples, vários itens = vários pontos!</p>
-            <a href="" class="botao-link">Orientações de descarte</a>
-        </section>
-
-        <section class="box-titulo">
-            <h2>Como Participar?</h2>
-            <p>Informações sobre como usar a plataforma.</p>
-        </section>
-
-        <section class="participar">
-            <p>Para fazer parte do programa, basta criar uma conta de usuário e localizar pontos de coleta próximos da
-                sua àrea, e então, basta registrar os itens e os materiais descartados para receber seus pontos de
-                coleta.</p>
-            <p>Deseja adicionar um ponto d coleta? Basta criar uma conta de responsável e preencher os formulários na
-                página de cadastro.</p>
-            <a href="" class="botao-link">Cadastre-se</a>
+        <section id="como-participar">
+            <div class="Como-Participar-box autoHide">
+                <div class="Como-partipipar-content">
+                    <h2>Como Participar?</h2>
+                    <p>Participar do EcoCollect é simples, gratuito e funciona de forma totalmente colaborativa. A plataforma utiliza pontos de coleta sugeridos pelos próprios usuários para ampliar o alcance da reciclagem na cidade e facilitar o acesso aos locais de descarte. Sempre que um novo ponto é cadastrado no sistema, nossa equipe de responsáveis analisa as informações enviadas e avalia a viabilidade do endereço e dos materiais indicados; após a aprovação, o ponto é ativado e passa a aparecer no mapa e nas listagens para toda a comunidade. Além disso, para incentivar o descarte consciente no dia a dia e reconhecer quem faz a sua parte, criamos um sistema de pontuação que calcula seus pontos automaticamente com base no tipo de material e na quantidade de itens descartados. Assim, você acompanha sua evolução, participa de campanhas ativas e ajuda a manter a cidade mais limpa. É simples: quanto mais você recicla, mais pontos acumula!</p>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy;2026 Ambientify. Todos os direitos reservados</p>
+    <footer class="box-footer">
+        <div class="content-footer autoHide">
+            <div class="footer-col">
+                <h2>EcoCollect</h2>
+                <span>by Ambientify</span>
+                <p>Conectando pessoas e pontos de coleta seletiva para transformar o descarte consciente em impacto ambiental positivo.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Orientações</h3>
+                <a href="visualizacao_ponto">Pontos de Coleta Próximos</a>
+                <a href="">Orientações de Descarte</a>
+                <a href="">Campanhas de Descarte</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Instituições</h3>
+                <a href="https://cempre.org.br/" target="_blank" rel="noopener noreferrer">CEMPRE - Compromisso Empresarial para Reciclagem</a>
+                <a href="https://www.reciclasampa.com.br/" target="_blank" rel="noopener noreferrer">Recicla Sampa</a>
+                <a href="https://ambipar.com/" target="_blank" rel="noopener noreferrer">Ambipar Group</a>
+                <a href="https://www.eureciclo.com.br/" target="_blank" rel="noopener noreferrer">eureciclo</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p>contato@ecocollect.com.br</p>
+                <p>Suporte Ambientify</p>
+                <p>Segunda a Sexta, 08h às 18h</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 EcoCollect by Ambientify. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
 </body>

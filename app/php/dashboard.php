@@ -181,7 +181,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                 <div class="sub-menu">
                     <a href="cadastro_usuario.php">Usuário</a>
                     <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
-                    <a href="">Campanha</a>
+                    <a href="cadastr">Campanha</a>
                 </div>
             </details>
 
