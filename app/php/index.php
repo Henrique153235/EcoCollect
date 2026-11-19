@@ -65,6 +65,9 @@ try {
     </header>
 
     <main>
+        <video width="100%" autoplay muted loop playsinline>
+            <source src="caminho/do-video.mp4" type="video/mp4">
+        </video>
         <section class="home autoHide">
             <div class="home-content">
                 <h1>Bem-vindo a EcoCollect!</h1>
