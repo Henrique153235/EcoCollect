@@ -175,6 +175,7 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
         <nav>
             <a href="index.php">Início</a>
             <a class="pagina-atual" href="dashboard.php">Dashboard</a>
+            <a href="loja.php">Loja</a>
 
             <details name="menu-nav">
                 <summary>Cadastro</summary>
@@ -334,14 +335,14 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
                         <tbody>
                             <?php foreach ($rankingTop10 as $idx => $rankUser): ?>
                                 <?php
-                                    $posicao = $idx + 1;
-                                    $ehUsuarioAtual = ((int) $rankUser['id'] === $idUsuarioLogado);
-                                    $classePodio = match ($posicao) {
-                                        1 => 'podio-ouro',
-                                        2 => 'podio-prata',
-                                        3 => 'podio-bronze',
-                                        default => '',
-                                    };
+                                $posicao = $idx + 1;
+                                $ehUsuarioAtual = ((int) $rankUser['id'] === $idUsuarioLogado);
+                                $classePodio = match ($posicao) {
+                                    1 => 'podio-ouro',
+                                    2 => 'podio-prata',
+                                    3 => 'podio-bronze',
+                                    default => '',
+                                };
                                 ?>
                                 <tr class="<?= $ehUsuarioAtual ? 'linha-usuario-atual' : '' ?>">
                                     <td class="col-pos">
@@ -432,8 +433,40 @@ $pontosColetaFiltrados = $stmtPontos->fetchAll(PDO::FETCH_ASSOC);
 
     </main>
 
-    <footer>
-        <p>&copy;2026 Ambientify. Todos os direitos reservados</p>
+    <footer class="box-footer">
+        <div class="content-footer">
+            <div class="footer-col">
+                <h2>EcoCollect</h2>
+                <span>by Ambientify</span>
+                <p>Conectando pessoas e pontos de coleta seletiva para transformar o descarte consciente em impacto ambiental positivo.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Orientações</h3>
+                <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
+                <a href="">Orientações de Descarte</a>
+                <a href="">Campanhas de Descarte</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Instituições</h3>
+                <a href="https://cempre.org.br/" target="_blank" rel="noopener noreferrer">CEMPRE - Compromisso Empresarial para Reciclagem</a>
+                <a href="https://www.reciclasampa.com.br/" target="_blank" rel="noopener noreferrer">Recicla Sampa</a>
+                <a href="https://ambipar.com/" target="_blank" rel="noopener noreferrer">Ambipar Group</a>
+                <a href="https://www.eureciclo.com.br/" target="_blank" rel="noopener noreferrer">eureciclo</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p>contato@ecocollect.com.br</p>
+                <p>Suporte Ambientify</p>
+                <p>Segunda a Sexta, 08h às 18h</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 EcoCollect by Ambientify. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
 </body>

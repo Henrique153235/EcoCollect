@@ -114,8 +114,10 @@ body {
     font-weight: 500;
 }
 
-
+/* Seção Home com Imagem de Fundo e Camada de Contraste */
 .home {
+    position: relative;
+    overflow: hidden;
     min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
@@ -124,6 +126,20 @@ body {
     gap: 40px;
     padding: 40px 5%;
     margin-bottom: 80px;
+    background-image: url("../img/img-home.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.home::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--verde-escuro);
+    opacity: 0.72;
+    z-index: 1;
+    pointer-events: none;
 }
 
 @keyframes fade-scroll {
@@ -144,6 +160,8 @@ body {
 }
 
 .home-content {
+    position: relative;
+    z-index: 2;
     flex: 1 1 350px;
     max-width: 650px;
 }
@@ -152,6 +170,7 @@ body {
     font-size: 56px;
     font-weight: 700;
     line-height: 1.2;
+    text-shadow: 0 2px 10px var(--verde-escuro);
 }
 
 .home-content h3 {
@@ -159,12 +178,14 @@ body {
     font-weight: 700;
     color: var(--verde-folha);
     margin-top: 10px;
+    text-shadow: 0 2px 8px var(--verde-escuro);
 }
 
 .home-content p {
     font-size: 16px;
     margin: 20px 0 40px;
     line-height: 1.5;
+    text-shadow: 0 1px 6px var(--verde-escuro);
 }
 
 .home-content .btn-box {
@@ -200,7 +221,7 @@ body {
 }
 
 .btn-box a:nth-child(2) {
-    background-color: transparent;
+    background-color: var(--verde-escuro);
     color: var(--verde-folha);
 }
 
@@ -229,6 +250,8 @@ body {
 }
 
 .box-estatisticas {
+    position: relative;
+    z-index: 2;
     flex: 1 1 350px;
     display: flex;
     justify-content: center;
@@ -242,6 +265,9 @@ body {
     flex-wrap: wrap;
     gap: 20px;
     border: solid 4px var(--verde-folha);
+    background-color: transparent;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     width: 100%;
     max-width: 650px;
     padding: 25px;
@@ -255,6 +281,7 @@ body {
     align-items: center;
     gap: 10px;
     border: 2px solid var(--verde-folha);
+    background-color: var(--verde-escuro);
     border-radius: 12px;
     width: 45%;
     min-height: 200px;
@@ -285,15 +312,20 @@ body {
     color: var(--bege);
 }
 
-.img-history, .img-objective {
+.img-history,
+.img-objective,
+.img-participate {
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
 }
 
-.img-history img, .img-objective img {
+.img-history img,
+.img-objective img,
+.img-participate img {
     width: 100%;
     height: auto;
     display: block;
+    border-radius: 12px;
 }
 
 .wrapper {
@@ -305,6 +337,7 @@ body {
     justify-content: space-around;
     gap: 3rem;
     margin: 40px 0;
+    margin-bottom: 220px;
 }
 
 .wrapper-right {
@@ -316,21 +349,25 @@ body {
     justify-content: space-around;
     gap: 3rem;
     margin: 40px 0;
+    margin-bottom: 80px;
 }
 
-.text, .text-right {
+.text,
+.text-right {
     flex: 1 1 300px;
     text-align: justify;
 }
 
-.text h2, .text-right h2 {
+.text h2,
+.text-right h2 {
     font-size: 45px;
     color: var(--verde-folha);
     line-height: 1.3;
     margin-bottom: 15px;
 }
 
-.text p, .text-right p {
+.text p,
+.text-right p {
     color: var(--branco-suave);
     line-height: 1.5;
 }
@@ -352,34 +389,9 @@ body {
     }
 }
 
-.Como-Participar-box {
-    min-height: 45vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 40px 5%;
-    margin-bottom: 80px;
-}
-
-.Como-partipipar-content {
-    width: 100%;
-    max-width: 900px;
-}
-
-.Como-partipipar-content h2 {
-    font-size: 45px;
-    color: var(--verde-folha);
-    line-height: 1.3;
-    text-align: left;
-    margin-bottom: 15px;
-}
-
-.Como-partipipar-content p {
-    font-size: 16px;
-    line-height: 1.5;
-    text-align: justify;
-    color: var(--branco-suave);
+#como-participar {
+    margin-top: 150px;
+    margin-bottom: 30px;
 }
 
 .box-footer {
@@ -463,7 +475,8 @@ body {
         font-size: 24px;
     }
 
-    .text h2, .text-right h2, .Como-partipipar-content h2 {
+    .text h2,
+    .text-right h2 {
         font-size: 30px;
     }
 

@@ -65,9 +65,6 @@ try {
     </header>
 
     <main>
-        <video width="100%" autoplay muted loop playsinline>
-            <source src="caminho/do-video.mp4" type="video/mp4">
-        </video>
         <section class="home autoHide">
             <div class="home-content">
                 <h1>Bem-vindo a EcoCollect!</h1>
@@ -111,7 +108,7 @@ try {
         <section>
             <div class="wrapper autoShow">
                 <div class="img-history">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySOOYJkJI1oCP4dRwqUam9GkpM6O9w7mOr6HN4tiACg&s=10"
+                    <img src="../img/img-logo.jpg"
                         alt="Nossa História">
                 </div>
 
@@ -123,7 +120,7 @@ try {
 
             <div class="wrapper-right autoShow">
                 <div class="img-objective">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySOOYJkJI1oCP4dRwqUam9GkpM6O9w7mOr6HN4tiACg&s=10"
+                    <img src="../img/img-objetivo.jpg"
                         alt="Nosso Objetivo">
                 </div>
 
@@ -135,8 +132,12 @@ try {
         </section>
 
         <section id="como-participar">
-            <div class="Como-Participar-box autoHide">
-                <div class="Como-partipipar-content">
+            <div class="wrapper autoShow">
+                <div class="img-participate">
+                    <img src="../img/img-participar.jpg" alt="Como Participar">
+                </div>
+
+                <div class="text">
                     <h2>Como Participar?</h2>
                     <p>Participar do EcoCollect é simples, gratuito e funciona de forma totalmente colaborativa. A plataforma utiliza pontos de coleta sugeridos pelos próprios usuários para ampliar o alcance da reciclagem na cidade e facilitar o acesso aos locais de descarte. Sempre que um novo ponto é cadastrado no sistema, nossa equipe de responsáveis analisa as informações enviadas e avalia a viabilidade do endereço e dos materiais indicados; após a aprovação, o ponto é ativado e passa a aparecer no mapa e nas listagens para toda a comunidade. Além disso, para incentivar o descarte consciente no dia a dia e reconhecer quem faz a sua parte, criamos um sistema de pontuação que calcula seus pontos automaticamente com base no tipo de material e na quantidade de itens descartados. Assim, você acompanha sua evolução, participa de campanhas ativas e ajuda a manter a cidade mais limpa. É simples: quanto mais você recicla, mais pontos acumula!</p>
                 </div>
