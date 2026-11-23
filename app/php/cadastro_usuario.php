@@ -53,40 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoCollect | Cadastro de Usuário</title>
     <link rel="stylesheet" href="../css/cadastro_usuario.css">
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 
 <body>
 
-    <header class="header">
-        <div class="logo">
-            <h1>EcoCollect</h1>
-            <h3>by Ambientify</h3>
-        </div>
-
-        <nav class="navbar">
-            <a href="index.php">Inicio</a>
-            <a href="dashboard.php">Dashboard</a>
-
-            <details name="menu-nav">
-                <summary>Cadastro</summary>
-                <div class="sub-menu">
-                    <a href="cadastro_usuario.php" class="active">Usuário</a>
-                    <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
-                    <a href="">Campanha</a>
-                </div>
-            </details>
-
-            <details name="menu-nav">
-                <summary>Coletas</summary>
-                <div class="sub-menu menu-direita">
-                    <a href="">Orientações de Descarte</a>
-                    <a href="">Campanhas de Descarte</a>
-                    <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
-                </div>
-            </details>
-        </nav>
-    </header>
-
+    <?php require_once __DIR__ . "/header.php" ?>
     <main>
         <section class="caixa-cadastro">
             <h2><?= isset($_GET['id']) ? 'Editar Usuário' : 'Cadastrar Usuário' ?></h2>

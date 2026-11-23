@@ -31,7 +31,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px 5%;
+    padding: 16px 4% 16px 20px;
     background-color: var(--verde-escuro);
     display: flex;
     flex-wrap: wrap;
@@ -63,6 +63,22 @@ body {
 .navbar a.active,
 .navbar .menu-item:hover span {
     color: var(--verde-folha);
+}
+
+.navbar .menu-item.usuario-logado span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border: 1.5px solid var(--verde-folha);
+    border-radius: 20px;
+    color: var(--verde-folha);
+    font-weight: 600;
+}
+
+.navbar .menu-item.usuario-logado:hover span {
+    background-color: var(--verde-folha);
+    color: var(--verde-escuro);
 }
 
 .menu-item {
@@ -108,10 +124,29 @@ body {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     font-size: 18px;
     color: var(--branco-suave);
     text-decoration: none;
     font-weight: 500;
+}
+
+.logo img {
+    width: 80px;
+    height: auto;
+    max-height: 75px;
+    object-fit: contain;
+    border: none;
+    border-radius: 0;
+    flex-shrink: 0;
+}
+
+.logo .logo-texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
 }
 
 /* Seção Home com Imagem de Fundo e Camada de Contraste */

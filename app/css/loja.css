@@ -616,3 +616,24 @@ header nav details .sub-menu a:hover {
         gap: 30px;
     }
 }
+
+.card-brinde .brinde-imagem {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--areia);
+    background-color: var(--branco-suave);
+}
+
+.card-brinde .brinde-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.card-brinde:hover .brinde-imagem img {
+    transform: scale(1.03);
+}

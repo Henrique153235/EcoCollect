@@ -108,11 +108,11 @@ INSERT INTO Material (tipo, valorUnidade) VALUES
 ('vidros', 3.00),
 ('organico', 0.50);
 
-INSERT INTO Brinde (nome, descricao, custoPontos, estoque) VALUES
-('Ecobag EcoCollect', 'Sacola retornável de algodão cru reforçado.', 50.00, 30),
-('Garrafa Térmica Inox 500ml', 'Garrafa reutilizável para reduzir o consumo de plástico.', 120.00, 15),
-('Kit Canudos de Inox + Escova', 'Conjunto sustentável com estojo de transporte.', 35.00, 40),
-('Muda de Planta Nativa', 'Muda pronta para plantio com adubo orgânico.', 25.00, 50);
+INSERT INTO Brinde (nome, descricao, custoPontos, estoque, imagem) VALUES
+('Ecobag EcoCollect', 'Sacola retornável de algodão cru reforçado.', 50.00, 30, 'CollectBag.png'),
+('Garrafa Térmica Inox 500ml', 'Garrafa reutilizável para reduzir o consumo de plástico.', 120.00, 15, 'EcoGarrafa.png'),
+('Kit Canudos de Inox + Escova', 'Conjunto sustentável com estojo de transporte.', 35.00, 40, 'EcoNudos.jpg'),
+('Muda de Planta Nativa', 'Muda pronta para plantio com adubo orgânico.', 25.00, 50, 'EcoPlanta.jpg');
 
 CREATE OR REPLACE VIEW ViewPontosDeColeta AS
 SELECT
@@ -204,3 +204,8 @@ GROUP BY
     camp.dataInicio,
     camp.dataFim,
     camp.criadoEm;
+
+UPDATE Brinde SET imagem = 'CollectBag.png' WHERE nome = 'Ecobag EcoCollect';
+UPDATE Brinde SET imagem = 'EcoGarrafa.png' WHERE nome = 'Garrafa Térmica Inox 500ml';
+UPDATE Brinde SET imagem = 'EcoNudos.jpg'   WHERE nome = 'Kit Canudos de Inox + Escova';
+UPDATE Brinde SET imagem = 'EcoPlanta.jpg'  WHERE nome = 'Muda de Planta Nativa';

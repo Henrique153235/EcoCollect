@@ -146,63 +146,19 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campanhas de Descarte | EcoCollect</title>
     <link rel="stylesheet" href="../css/campanhas.css">
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 
 <body>
 
-    <header>
-        <div class="nome-projeto">
-            <h1>EcoCollect</h1>
-            <h3>by Ambientify</h3>
-        </div>
-
-        <nav>
-            <a href="index.php">Início</a>
-
-            <?php if ($idUsuarioLogado !== null): ?>
-                <a href="dashboard.php">Dashboard</a>
-                <a href="loja.php">Loja</a>
-            <?php endif; ?>
-
-            <details name="menu-nav">
-                <summary>Cadastro</summary>
-                <div class="sub-menu">
-                    <a href="cadastro_usuario.php">Usuário</a>
-                    <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
-                    <?php if ($idUsuarioLogado !== null): ?>
-                        <a href="cadastro_campanha.php">Campanha</a>
-                    <?php endif; ?>
-                </div>
-            </details>
-
-            <details name="menu-nav">
-                <summary>Coletas</summary>
-                <div class="sub-menu menu-direita">
-                    <a href="">Orientações de Descarte</a>
-                    <a class="pagina-atual active" href="campanhas.php">Campanhas de Descarte</a>
-                    <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
-                </div>
-            </details>
-
-            <?php if ($idUsuarioLogado !== null): ?>
-                <details name="menu-nav">
-                    <summary>Perfil</summary>
-                    <div class="sub-menu menu-direita">
-                        <a href="editar_usuario.php">Editar Perfil</a>
-                        <a href="logout.php">Sair</a>
-                    </div>
-                </details>
-            <?php else: ?>
-                <a href="login_usuario.php">Entrar</a>
-            <?php endif; ?>
-        </nav>
-    </header>
+    <?php require_once __DIR__ . "/header.php" ?>
 
     <main class="campanhas-main">
 
         <section class="welcome-banner">
             <div class="welcome-text">
                 <h2>Campanhas de Descarte</h2>
+                <p>Acompanhe mutirões e ações especiais de arrecadação de recicláveis ativos e programados na comunidade.</p>
             </div>
             <div class="banner-actions">
                 <?php if ($idUsuarioLogado !== null): ?>
@@ -323,8 +279,40 @@ try {
 
     </main>
 
-    <footer>
-        <p>&copy;2026 Ambientify. Todos os direitos reservados</p>
+    <footer class="box-footer">
+        <div class="content-footer">
+            <div class="footer-col">
+                <h2>EcoCollect</h2>
+                <span>by Ambientify</span>
+                <p>Conectando pessoas e pontos de coleta seletiva para transformar o descarte consciente em impacto ambiental positivo.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Orientações</h3>
+                <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
+                <a href="">Orientações de Descarte</a>
+                <a href="campanhas.php">Campanhas de Descarte</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Instituições</h3>
+                <a href="https://cempre.org.br/" target="_blank" rel="noopener noreferrer">CEMPRE - Compromisso Empresarial para Reciclagem</a>
+                <a href="https://www.reciclasampa.com.br/" target="_blank" rel="noopener noreferrer">Recicla Sampa</a>
+                <a href="https://ambipar.com/" target="_blank" rel="noopener noreferrer">Ambipar Group</a>
+                <a href="https://www.eureciclo.com.br/" target="_blank" rel="noopener noreferrer">eureciclo</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p>contato@ecocollect.com.br</p>
+                <p>Suporte Ambientify</p>
+                <p>Segunda a Sexta, 08h às 18h</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 EcoCollect by Ambientify. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
 </body>

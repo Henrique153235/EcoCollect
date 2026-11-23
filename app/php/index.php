@@ -8,9 +8,20 @@ $totalColetado = 0.0;
 $totalUsuarios = 0;
 $totalPontos = 0;
 $campanhasAtivas = 0;
+$nomeUsuarioLogado = '';
 
 try {
     $pdo = database();
+
+    if (isset($_SESSION['usuario_id'])) {
+        $idUsuarioLogado = (int) $_SESSION['usuario_id'];
+        if ($idUsuarioLogado > 0) {
+            $usuarioLogado = read($pdo, 'Usuarios', 'id = ?', [$idUsuarioLogado]);
+            if ($usuarioLogado && !empty($usuarioLogado['nome'])) {
+                $nomeUsuarioLogado = trim((string) $usuarioLogado['nome']);
+            }
+        }
+    }
 
     $totalColetado = (float)$pdo->query("SELECT COALESCE(SUM(quantidadeColetada), 0) FROM Coleta")->fetchColumn();
     $totalUsuarios = count(readAll($pdo, 'Usuarios'));
@@ -29,40 +40,13 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoCollect | Inicio</title>
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body>
-    <header class="header">
-        <div class="logo">
-            <h1>EcoCollect</h1>
-            <h3>by Ambientify</h3>
-        </div>
-
-        <nav class="navbar">
-            <a href="index.php" class="active">Inicio</a>
-            <a href="dashboard.php">Dashboard</a>
-            <a href="loja.php">Loja</a>
-
-            <div class="menu-item">
-                <span>Cadastro</span>
-                <div class="sub-menu">
-                    <a href="cadastro_usuario.php">Usuário</a>
-                    <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
-                    <a href="cadastro_campanha.php">Campanha</a>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <span>Coletas</span>
-                <div class="sub-menu menu-direita">
-                    <a href="">Orientações de Descarte</a>
-                    <a href="">Campanhas de Descarte</a>
-                    <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
-                </div>
-            </div>
-        </nav>
-    </header>
+    
+<?php require_once __DIR__ . "/header.php" ?>
 
     <main>
         <section class="home autoHide">
@@ -157,7 +141,7 @@ try {
                 <h3>Orientações</h3>
                 <a href="visualizacao_ponto">Pontos de Coleta Próximos</a>
                 <a href="">Orientações de Descarte</a>
-                <a href="">Campanhas de Descarte</a>
+                <a href="campanhas.php">Campanhas de Descarte</a>
             </div>
 
             <div class="footer-col">

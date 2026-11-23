@@ -69,39 +69,12 @@ $idsMateriaisSelecionados = array_column($materiaisPonto, 'idMaterial');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Ponto de Coleta | EcoCollect</title>
     <link rel="stylesheet" href="../css/edicao_ponto_coleta.css">
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 
 <body>
 
-    <header>
-        <div class="nome-projeto">
-            <h1>EcoCollect</h1>
-            <h3>by Ambientify</h3>
-        </div>
-
-        <nav>
-            <a href="index.php">Início</a>
-            <a href="dashboard.php">Dashboard</a>
-
-            <details name="menu-nav">
-                <summary>Cadastro</summary>
-                <div class="sub-menu">
-                    <a href="cadastro_usuario.php">Usuário</a>
-                    <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
-                    <a href="">Campanha</a>
-                </div>
-            </details>
-
-            <details name="menu-nav">
-                <summary>Coletas</summary>
-                <div class="sub-menu menu-direita">
-                    <a href="">Orientações de Descarte</a>
-                    <a href="">Campanhas de Descarte</a>
-                    <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
-                </div>
-            </details>
-        </nav>
-    </header>
+    <?php require_once __DIR__ . "/header.php" ?>
 
     <main>
         <h2 class="box-titulo">Editar Ponto de Coleta</h2>
