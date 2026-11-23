@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/init.php';
 
 $listaMateriais = readAll($pdo, "Material");
@@ -32,53 +34,52 @@ $pontoColeta = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pontos de Coleta | EcoCollect</title>
+    <title>EcoCollect | Pontos de Coleta</title>
     <link rel="stylesheet" href="../css/visualizacao_ponto.css">
 </head>
 
 <body>
 
-    <header>
-        <div class="nome-projeto">
+    <header class="header">
+        <div class="logo">
             <h1>EcoCollect</h1>
             <h3>by Ambientify</h3>
         </div>
 
-        <nav>
-            <a href="index.php">Início</a>
+        <nav class="navbar">
+            <a href="index.php">Inicio</a>
             <a href="dashboard.php">Dashboard</a>
 
-            <details name="menu-nav">
-                <summary>Cadastro</summary>
+            <div class="menu-item">
+                <span>Cadastro</span>
                 <div class="sub-menu">
                     <a href="cadastro_usuario.php">Usuário</a>
                     <a href="cadastro_ponto_coleta.php">Ponto de Coleta</a>
                     <a href="">Campanha</a>
                 </div>
-            </details>
+            </div>
 
-            <details name="menu-nav">
-                <summary>Coletas</summary>
+            <div class="menu-item">
+                <span>Coletas</span>
                 <div class="sub-menu menu-direita">
                     <a href="">Orientações de Descarte</a>
                     <a href="">Campanhas de Descarte</a>
                     <a href="visualizacao_ponto.php" class="active">Pontos de Coleta Próximos</a>
                 </div>
-            </details>
+            </div>
         </nav>
     </header>
 
     <main>
-
-        <section class="dashboard-container">
-            <div class="dashboard-header">
-                <h2 class="box-titulo">Pontos de Coleta Cadastrados</h2>
-                <a href="cadastro_ponto_coleta.php" class="btn-cadastrar">Cadastrar Novo Ponto</a>
+        <section class="caixa-pontos">
+            <div class="topo-pontos">
+                <h2>Pontos de Coleta Cadastrados</h2>
+                <a href="cadastro_ponto_coleta.php" class="btn-novo">Cadastrar Novo Ponto</a>
             </div>
 
             <details class="filtro-box" <?= (!empty($statusFiltro) || !empty($materialFiltro)) ? 'open' : '' ?>>
@@ -121,7 +122,7 @@ $pontoColeta = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach ($pontoColeta as $p): ?>
                         <article class="card-ponto">
                             <div class="card-header">
-                                <span class="card-id"><strong>Ponto:</strong> #<?= htmlspecialchars($p['id']) ?></span>
+                                <span class="card-id"><strong>Ponto:</strong> #<?= htmlspecialchars((string) $p['id']) ?></span>
                                 <span class="status-tag status-<?= htmlspecialchars($p['status']) ?>">
                                     <?= ucfirst(htmlspecialchars($p['status'])) ?>
                                 </span>
@@ -139,19 +140,50 @@ $pontoColeta = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </div>
 
                             <div class="card-actions">
-                                <a href="edicao_ponto_coleta.php?id=<?= $p['id'] ?>" class="btn-acao btn-editar">Editar</a>
-                                <a href="remocao_ponto_coleta.php?id=<?= $p['id'] ?>" class="btn-acao btn-remover">Remover</a>
+                                <a href="edicao_ponto_coleta.php?id=<?= $p['id'] ?>" class="btn-editar">Editar</a>
+                                <a href="remocao_ponto_coleta.php?id=<?= $p['id'] ?>" class="btn-remover">Remover</a>
                             </div>
                         </article>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
         </section>
-
     </main>
 
-    <footer>
-        <p>&copy;2026 Ambientify. Todos os direitos reservados</p>
+    <footer class="box-footer">
+        <div class="content-footer">
+            <div class="footer-col">
+                <h2>EcoCollect</h2>
+                <span>by Ambientify</span>
+                <p>Conectando pessoas e pontos de coleta seletiva para transformar o descarte consciente em impacto ambiental positivo.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Orientações</h3>
+                <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
+                <a href="">Orientações de Descarte</a>
+                <a href="">Campanhas de Descarte</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Instituições</h3>
+                <a href="https://cempre.org.br/" target="_blank" rel="noopener noreferrer">CEMPRE - Compromisso Empresarial para Reciclagem</a>
+                <a href="https://www.reciclasampa.com.br/" target="_blank" rel="noopener noreferrer">Recicla Sampa</a>
+                <a href="https://ambipar.com/" target="_blank" rel="noopener noreferrer">Ambipar Group</a>
+                <a href="https://www.eureciclo.com.br/" target="_blank" rel="noopener noreferrer">eureciclo</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p>contato@ecocollect.com.br</p>
+                <p>Suporte Ambientify</p>
+                <p>Segunda a Sexta, 08h às 18h</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 EcoCollect by Ambientify. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
 </body>
