@@ -71,6 +71,7 @@ $idsMateriaisSelecionados = array_column($materiaisPonto, 'idMaterial');
     <link rel="stylesheet" href="../css/edicao_ponto_coleta.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="icon" type="image/png" href="../img/img-logo.jpg">
 </head>
 
 <body>

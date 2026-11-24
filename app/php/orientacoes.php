@@ -11,6 +11,7 @@ require_once __DIR__ . '/init.php';
     <link rel="stylesheet" href="../css/orientacoes.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="icon" type="image/png" href="../img/img-logo.jpg">
 </head>
 
 <body>
