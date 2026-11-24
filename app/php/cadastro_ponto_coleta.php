@@ -56,6 +56,7 @@ $materiais = readAll($pdo, "Material");
     <link rel="stylesheet" href="../css/cadastro_ponto_coleta.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="icon" type="image/png" href="../img/img-logo.jpg">
 </head>
 
 <body>

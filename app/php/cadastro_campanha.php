@@ -98,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') == 'cadastr
     <link rel="stylesheet" href="../css/cadastro_campanha.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="icon" type="image/png" href="../img/img-logo.jpg">
 </head>
 
 <body>

@@ -9,7 +9,7 @@
         <div class="footer-col">
             <h3>Orientações</h3>
             <a href="visualizacao_ponto.php">Pontos de Coleta Próximos</a>
-            <a href="index.php#como-participar">Orientações de Descarte</a>
+            <a href="orientacoes.php">Orientações de Descarte</a>
             <a href="campanhas.php">Campanhas de Descarte</a>
         </div>
 
@@ -18,7 +18,7 @@
             <a href="https://cempre.org.br/" target="_blank" rel="noopener noreferrer">CEMPRE - Compromisso Empresarial para Reciclagem</a>
             <a href="https://www.reciclasampa.com.br/" target="_blank" rel="noopener noreferrer">Recicla Sampa</a>
             <a href="https://ambipar.com/" target="_blank" rel="noopener noreferrer">Ambipar Group</a>
-            <a href="https://www.eureciclo.com.br/" target="_blank" rel="noopener noreferrer">eureciclo</a>
+            <a href="https://www.eureciclo.com.br/" target="_blank" rel="noopener noreferrer">Eureciclo</a>
         </div>
 
         <div class="footer-col">
