@@ -1,0 +1,310 @@
+:root {
+    --verde-escuro: #1f3b2c;
+    --marrom-escuro: #4a3a2a;
+    --verde-oliva: #6b7f3a;
+    --areia: #8b7b5a;
+    --bege: #d7d2c7;
+    --branco-suave: #f6f4ef;
+    --verde-folha: #8fb339;
+    --terracota: #c86d51;
+    --azul-petroleo: #3b6e7c;
+    color-scheme: dark;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--verde-escuro);
+    color: var(--branco-suave);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.orientacoes-main {
+    width: 100%;
+    max-width: 1280px;
+    margin: 40px auto 60px;
+    padding: 0 5%;
+    flex: 1;
+}
+
+.welcome-banner {
+    background-color: var(--verde-escuro);
+    border: 2px solid var(--verde-folha);
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.welcome-banner .welcome-text {
+    flex: 1 1 320px;
+}
+
+.welcome-banner .welcome-text h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--verde-folha);
+    margin-bottom: 8px;
+}
+
+.welcome-banner .welcome-text p {
+    font-size: 16px;
+    color: var(--bege);
+    line-height: 1.5;
+}
+
+.welcome-banner .banner-actions .btn-banner {
+    display: inline-block;
+    background-color: var(--verde-oliva);
+    border: 2px solid var(--verde-oliva);
+    border-radius: 8px;
+    color: var(--branco-suave);
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.welcome-banner .banner-actions .btn-banner:hover {
+    background-color: var(--verde-escuro);
+    border-color: var(--verde-folha);
+    color: var(--verde-folha);
+}
+
+.card-box {
+    background-color: var(--verde-escuro);
+    border: 2px solid var(--areia);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 30px;
+}
+
+.card-box:last-child {
+    margin-bottom: 0;
+}
+
+.box-subtitulo {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--verde-folha);
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--verde-oliva);
+}
+
+.passos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.passo-card {
+    background-color: var(--verde-escuro);
+    border: 2px solid var(--verde-oliva);
+    border-radius: 12px;
+    padding: 22px;
+    transition: 0.3s;
+}
+
+.passo-card:hover {
+    transform: translateY(-3px);
+    background-color: var(--marrom-escuro);
+    border-color: var(--verde-folha);
+}
+
+.passo-numero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: var(--verde-folha);
+    color: var(--verde-escuro);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.passo-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--branco-suave);
+    margin-bottom: 10px;
+}
+
+.passo-card p {
+    font-size: 15px;
+    color: var(--bege);
+    line-height: 1.55;
+}
+
+.criacao-lista {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.criacao-item {
+    border-left: 4px solid var(--verde-folha);
+    background-color: var(--marrom-escuro);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 20px;
+}
+
+.criacao-item h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--verde-folha);
+    margin-bottom: 8px;
+}
+
+.criacao-item p {
+    font-size: 15px;
+    color: var(--branco-suave);
+    line-height: 1.5;
+}
+
+.secao-acoes {
+    display: flex;
+    gap: 15px;
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid var(--areia);
+    flex-wrap: wrap;
+}
+
+.secao-acoes .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--verde-oliva);
+    border: 2px solid var(--verde-oliva);
+    border-radius: 8px;
+    color: var(--branco-suave);
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.secao-acoes .btn-primary:hover {
+    background-color: var(--verde-escuro);
+    border-color: var(--verde-folha);
+    color: var(--verde-folha);
+}
+
+.secao-acoes .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 22px;
+    border: 2px solid var(--areia);
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--bege);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.secao-acoes .btn-secondary:hover {
+    background-color: var(--marrom-escuro);
+    border-color: var(--verde-folha);
+    color: var(--verde-folha);
+}
+
+.materiais-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.material-card {
+    background-color: var(--verde-escuro);
+    border: 2px solid var(--verde-oliva);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.material-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--verde-folha);
+    margin-bottom: 12px;
+}
+
+.material-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.material-card p:last-child {
+    margin-bottom: 0;
+}
+
+.material-card .pode {
+    color: var(--branco-suave);
+}
+
+.material-card .pode strong {
+    color: var(--verde-folha);
+}
+
+.material-card .nao-pode {
+    color: var(--bege);
+}
+
+.material-card .nao-pode strong {
+    color: var(--terracota);
+}
+
+@media (max-width: 900px) {
+    .passos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .criacao-lista,
+    .materiais-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .welcome-banner .welcome-text h2 {
+        font-size: 26px;
+    }
+
+    .welcome-banner .banner-actions,
+    .welcome-banner .banner-actions .btn-banner,
+    .secao-acoes .btn-primary,
+    .secao-acoes .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+}

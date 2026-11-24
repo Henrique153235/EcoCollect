@@ -67,9 +67,10 @@ $idsMateriaisSelecionados = array_column($materiaisPonto, 'idMaterial');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Ponto de Coleta | EcoCollect</title>
+    <title>EcoCollect | Editar Ponto de Coleta</title>
     <link rel="stylesheet" href="../css/edicao_ponto_coleta.css">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
 </head>
 
 <body>
@@ -77,52 +78,54 @@ $idsMateriaisSelecionados = array_column($materiaisPonto, 'idMaterial');
     <?php require_once __DIR__ . "/header.php" ?>
 
     <main>
-        <h2 class="box-titulo">Editar Ponto de Coleta</h2>
+        <section class="caixa-edicao">
+            <h2>Editar Ponto de Coleta</h2>
 
-        <?php if (!empty($erro)): ?>
-            <p style="color: red; text-align: center; margin-bottom: 15px;"><?= htmlspecialchars($erro) ?></p>
-        <?php endif; ?>
+            <?php if (!empty($erro)): ?>
+                <p class="msg-erro"><?= htmlspecialchars($erro) ?></p>
+            <?php endif; ?>
 
-        <form action="edicao_ponto_coleta.php?id=<?= (int) $id ?>" method="post">
-            <div class="form-option">
-                <label for="cep">CEP:</label>
-                <input type="text" name="cep" id="cep" maxlength="9" value="<?= htmlspecialchars($pontoColeta['cep'] ?? '') ?>" required>
-            </div>
+            <form action="edicao_ponto_coleta.php?id=<?= (int) $id ?>" method="post">
+                <div class="form-option">
+                    <label for="cep">CEP:</label>
+                    <input type="text" name="cep" id="cep" maxlength="9" value="<?= htmlspecialchars($pontoColeta['cep'] ?? '') ?>" required>
+                </div>
 
-            <div class="form-option">
-                <label for="materiais">Materiais:</label>
-                <?php foreach ($materiais as $m): ?>
-                    <label for="<?= htmlspecialchars($m['tipo']) ?>">
-                        <input
-                            type="checkbox"
-                            id="<?= htmlspecialchars($m['tipo']) ?>"
-                            name="opcoes[<?= htmlspecialchars($m['tipo']) ?>]"
-                            value="<?= (int) $m['id'] ?>"
-                            <?= in_array($m['id'], $idsMateriaisSelecionados) ? 'checked' : '' ?>
-                        >
-                        <?= htmlspecialchars(ucfirst($m['tipo'])) ?>
-                    </label>
-                <?php endforeach; ?>
-            </div>
+                <div class="form-option">
+                    <label>Materiais:</label>
+                    <div class="lista-materiais">
+                        <?php foreach ($materiais as $m): ?>
+                            <label for="<?= htmlspecialchars($m['tipo']) ?>">
+                                <input
+                                    type="checkbox"
+                                    id="<?= htmlspecialchars($m['tipo']) ?>"
+                                    name="opcoes[<?= htmlspecialchars($m['tipo']) ?>]"
+                                    value="<?= (int) $m['id'] ?>"
+                                    <?= in_array($m['id'], $idsMateriaisSelecionados) ? 'checked' : '' ?>
+                                >
+                                <?= htmlspecialchars(ucfirst($m['tipo'])) ?>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
 
-            <div class="form-option">
-                <label for="status">Status:</label>
-                <select name="status" id="status">
-                    <option value="disponivel" <?= ($pontoColeta['status'] ?? '') == 'disponivel' ? 'selected' : '' ?>>Disponível</option>
-                    <option value="indisponivel" <?= ($pontoColeta['status'] ?? '') == 'indisponivel' ? 'selected' : '' ?>>Indisponível</option>
-                </select>
-            </div>
+                <div class="form-option">
+                    <label for="status">Status:</label>
+                    <select name="status" id="status">
+                        <option value="disponivel" <?= ($pontoColeta['status'] ?? '') == 'disponivel' ? 'selected' : '' ?>>Disponível</option>
+                        <option value="indisponivel" <?= ($pontoColeta['status'] ?? '') == 'indisponivel' ? 'selected' : '' ?>>Indisponível</option>
+                    </select>
+                </div>
 
-            <div class="form-btns">
-                <button type="submit" class="btn-acao btn-confirmar">Confirmar</button>
-                <a href="visualizacao_ponto.php" class="btn-acao btn-cancelar">Cancelar</a>
-            </div>
-        </form>
+                <div class="form-btns">
+                    <button type="submit" class="btn-confirmar">Confirmar</button>
+                    <a href="visualizacao_ponto.php" class="btn-cancelar">Cancelar</a>
+                </div>
+            </form>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy;2026 Ambientify. Todos os direitos reservados</p>
-    </footer>
+    <?php require_once __DIR__ . "/footer.php" ?>
 
 </body>
 

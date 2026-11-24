@@ -33,79 +33,6 @@ body {
     flex-direction: column;
 }
 
-header {
-    background-color: var(--verde-principal);
-    color: var(--branco);
-    width: 100%;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-
-    .nome-projeto {
-        h1,
-        h3 {
-            font-weight: normal;
-        }
-    }
-
-    nav {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-
-        a,
-        summary {
-            color: var(--branco);
-            text-decoration: none;
-            transition: filter 0.2s, text-decoration 0.2s ease;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-
-        a.active {
-            font-weight: bold;
-            text-decoration: underline;
-        }
-
-        details {
-            position: relative;
-            display: inline-block;
-
-            summary {
-                cursor: pointer;
-                user-select: none;
-            }
-
-            .sub-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background-color: var(--verde-principal);
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                padding: 10px 15px;
-                border-radius: 4px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                z-index: 1000;
-
-                &.menu-direita {
-                    left: auto;
-                    right: 0;
-                }
-
-                a {
-                    white-space: nowrap;
-                }
-            }
-        }
-    }
-}
-
 main {
     background-color: var(--branco);
     color: var(--cor-texto);
@@ -113,7 +40,7 @@ main {
     border-radius: 8px;
     width: 90%;
     max-width: 550px;
-    margin: 20px auto;
+    margin: 40px auto 120px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
     .box-titulo {
@@ -200,13 +127,4 @@ main {
             }
         }
     }
-}
-
-footer {
-    background-color: var(--verde-principal);
-    color: var(--branco);
-    text-align: center;
-    padding: 15px;
-    width: 100%;
-    margin-top: auto;
 }

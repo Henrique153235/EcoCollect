@@ -137,7 +137,8 @@
     text-decoration: none;
 }
 
-.header .navbar .menu-item.usuario-logado > span {
+.header .navbar .menu-item.usuario-logado > span,
+.header .navbar a.botao-login-header {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -148,7 +149,9 @@
     font-weight: 600;
 }
 
-.header .navbar .menu-item.usuario-logado:hover > span {
+.header .navbar .menu-item.usuario-logado:hover > span,
+.header .navbar a.botao-login-header:hover,
+.header .navbar a.botao-login-header.active {
     background-color: #8fb339;
     color: #1f3b2c;
 }

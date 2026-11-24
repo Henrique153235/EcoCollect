@@ -38,9 +38,10 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCollect | Inicio</title>
+    <title>EcoCollect | Início</title>
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
@@ -129,41 +130,7 @@ try {
         </section>
     </main>
 
-    <footer class="box-footer">
-        <div class="content-footer autoHide">
-            <div class="footer-col">
-                <h2>EcoCollect</h2>
-                <span>by Ambientify</span>
-                <p>Conectando pessoas e pontos de coleta seletiva para transformar o descarte consciente em impacto ambiental positivo.</p>
-            </div>
-
-            <div class="footer-col">
-                <h3>Orientações</h3>
-                <a href="visualizacao_ponto">Pontos de Coleta Próximos</a>
-                <a href="">Orientações de Descarte</a>
-                <a href="campanhas.php">Campanhas de Descarte</a>
-            </div>
-
-            <div class="footer-col">
-                <h3>Instituições</h3>
-                <a href="https://cempre.org.br/" target="_blank" rel="noopener noreferrer">CEMPRE - Compromisso Empresarial para Reciclagem</a>
-                <a href="https://www.reciclasampa.com.br/" target="_blank" rel="noopener noreferrer">Recicla Sampa</a>
-                <a href="https://ambipar.com/" target="_blank" rel="noopener noreferrer">Ambipar Group</a>
-                <a href="https://www.eureciclo.com.br/" target="_blank" rel="noopener noreferrer">eureciclo</a>
-            </div>
-
-            <div class="footer-col">
-                <h3>Contato</h3>
-                <p>contato@ecocollect.com.br</p>
-                <p>Suporte Ambientify</p>
-                <p>Segunda a Sexta, 08h às 18h</p>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 EcoCollect by Ambientify. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+    <?php require_once __DIR__ . "/footer.php" ?>
 
 </body>
 
