@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS EcoCollect
+CREATE DATABASE EcoCollect
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
@@ -15,10 +15,13 @@ CREATE TABLE Usuarios (
 
 CREATE TABLE PontosDeColeta (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    idUsuario INT DEFAULT NULL,
     cep VARCHAR(9) NOT NULL,
     status ENUM('disponivel', 'indisponivel') NOT NULL DEFAULT 'disponivel',
+    INDEX idx_pontos_usuario (idUsuario),
     INDEX idx_pontos_status (status),
-    INDEX idx_pontos_cep (cep)
+    INDEX idx_pontos_cep (cep),
+    CONSTRAINT fk_ponto_usuario FOREIGN KEY (idUsuario) REFERENCES Usuarios(id) ON DELETE SET NULL
 );
 
 CREATE TABLE Material (
@@ -117,6 +120,8 @@ INSERT INTO Brinde (nome, descricao, custoPontos, estoque, imagem) VALUES
 CREATE OR REPLACE VIEW ViewPontosDeColeta AS
 SELECT
     p.id,
+    p.idUsuario,
+    u.nome AS criador,
     p.cep,
     p.status,
     COALESCE(
@@ -128,9 +133,10 @@ SELECT
         'Nenhum material cadastrado'
     ) AS materiais
 FROM PontosDeColeta p
+LEFT JOIN Usuarios u ON p.idUsuario = u.id
 LEFT JOIN PontoMaterial pm ON p.id = pm.idPonto
 LEFT JOIN Material m ON pm.idMaterial = m.id
-GROUP BY p.id, p.cep, p.status;
+GROUP BY p.id, p.idUsuario, u.nome, p.cep, p.status;
 
 CREATE OR REPLACE VIEW ViewMateriaisPorPonto AS
 SELECT m.tipo
@@ -204,8 +210,3 @@ GROUP BY
     camp.dataInicio,
     camp.dataFim,
     camp.criadoEm;
-
-UPDATE Brinde SET imagem = 'CollectBag.png' WHERE nome = 'Ecobag EcoCollect';
-UPDATE Brinde SET imagem = 'EcoGarrafa.png' WHERE nome = 'Garrafa Térmica Inox 500ml';
-UPDATE Brinde SET imagem = 'EcoNudos.jpg'   WHERE nome = 'Kit Canudos de Inox + Escova';
-UPDATE Brinde SET imagem = 'EcoPlanta.jpg'  WHERE nome = 'Muda de Planta Nativa';

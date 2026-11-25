@@ -90,6 +90,25 @@ main {
     width: 100%;
 }
 
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: var(--verde-escuro);
+}
+
+.alert.alert-success {
+    border: 2px solid var(--verde-folha);
+    color: var(--verde-folha);
+}
+
+.alert.alert-danger {
+    border: 2px solid var(--terracota);
+    color: var(--terracota);
+}
+
 .filtro-box {
     border: 2px solid var(--verde-folha);
     border-radius: 12px;
@@ -267,6 +286,7 @@ main {
 }
 
 .card-body {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -289,10 +309,27 @@ main {
     color: var(--bege);
 }
 
+.card-rodape {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top: 1px solid var(--areia);
+    padding-top: 12px;
+    min-height: 84px;
+}
+
+.criador-info {
+    font-size: 14px;
+    color: var(--bege);
+}
+
+.criador-info strong {
+    color: var(--branco-suave);
+}
+
 .card-actions {
     display: flex;
     gap: 12px;
-    margin-top: auto;
 }
 
 .btn-editar,

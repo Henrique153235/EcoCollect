@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <section class="card-box danger-zone">
                 <h3 class="box-subtitulo">Excluir Conta</h3>
                 <p>Ao excluir seu perfil, todos os seus dados cadastrais, histórico de coletas e pontos acumulados serão removidos permanentemente. Esta ação não pode ser desfeita.</p>
-                <form method="POST" action="editar_usuario.php" onsubmit="return confirm('Tem certeza que deseja excluir permanentemente seu perfil e todo o seu histórico de coletas?');">
+                <form method="POST" action="editar_usuario.php">
                     <input type="hidden" name="action" value="excluir_perfil">
                     <button type="submit" class="btn-danger">Excluir Meu Perfil</button>
                 </form>

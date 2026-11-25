@@ -216,7 +216,7 @@ try {
                                         Faltam <?= number_format($faltamPontos, 2, ',', '.') ?> pts
                                     </button>
                                 <?php else: ?>
-                                    <form method="POST" action="loja.php" onsubmit="return confirm('Confirmar o resgate de <?= htmlspecialchars(addslashes($brinde['nome'])) ?> por <?= number_format($custo, 2, ',', '.') ?> pontos?');">
+                                    <form method="POST" action="loja.php">
                                         <input type="hidden" name="action" value="resgatar_brinde">
                                         <input type="hidden" name="idBrinde" value="<?= (int) $brinde['id'] ?>">
                                         <button type="submit" class="btn-resgatar">Resgatar Colletável</button>

@@ -80,7 +80,7 @@ require_once __DIR__ . '/init.php';
             </div>
 
             <div class="secao-acoes">
-                <a href="cadastro_ponto.php" class="btn-primary">Cadastrar Novo Ponto</a>
+                <a href="cadastro_ponto_coleta.php" class="btn-primary">Cadastrar Novo Ponto</a>
                 <a href="cadastro_campanha.php" class="btn-secondary">Criar Campanha de Coleta</a>
             </div>
         </section>

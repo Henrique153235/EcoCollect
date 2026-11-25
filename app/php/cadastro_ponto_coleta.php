@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/init.php';
 
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login_usuario.php");
+    exit;
+}
+
+$idUsuarioLogado = (int) $_SESSION['usuario_id'];
 $erro = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -18,8 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $pdo->beginTransaction();
 
             $novoPontoColeta = [
-                'cep'    => $cep,
-                'status' => in_array($status, ['disponivel', 'indisponivel'], true) ? $status : 'disponivel',
+                'idUsuario' => $idUsuarioLogado,
+                'cep'       => $cep,
+                'status'    => in_array($status, ['disponivel', 'indisponivel'], true) ? $status : 'disponivel',
             ];
 
             $idPonto = create($pdo, "PontosDeColeta", $novoPontoColeta);
@@ -34,6 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
             $pdo->commit();
+
+            $_SESSION['flash_sucesso'] = "Ponto de coleta cadastrado com sucesso!";
+            header("Location: visualizacao_ponto.php");
+            exit;
 
             header("Location: visualizacao_ponto.php");
             exit;

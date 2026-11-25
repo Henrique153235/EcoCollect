@@ -267,7 +267,7 @@ try {
                             </span>
 
                             <?php if ($ehOrganizador): ?>
-                                <form method="POST" action="campanhas.php" onsubmit="return confirm('Deseja realmente excluir esta campanha?');">
+                                <form method="POST" action="campanhas.php">
                                     <input type="hidden" name="action" value="excluir_campanha">
                                     <input type="hidden" name="idCampanha" value="<?= (int) $camp['id'] ?>">
                                     <button type="submit" class="btn-excluir-campanha">Excluir</button>

@@ -385,6 +385,7 @@ details.filtro-box .form-filtro .botoes-filtro .btn-limpar:hover {
     gap: 12px;
     border-top: 1px solid var(--areia);
     padding-top: 12px;
+    min-height: 45px;
 }
 
 .card-campanha .campanha-rodape .organizador-info {

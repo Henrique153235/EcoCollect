@@ -4,17 +4,31 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/init.php';
 
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login_usuario.php");
+    exit;
+}
+
+$idUsuarioLogado = (int) $_SESSION['usuario_id'];
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id || $id <= 0) {
-    header("Location: visualizacao_ponto.php?erro=id_invalido");
+    $_SESSION['flash_erro'] = "Ponto de coleta inválido.";
+    header("Location: visualizacao_ponto.php");
     exit;
 }
 
 $pontosColeta = read($pdo, "ViewPontosDeColeta", "id = ?", [$id]);
 
 if (!$pontosColeta) {
-    header("Location: visualizacao_ponto.php?erro=nao_encontrado");
+    $_SESSION['flash_erro'] = "Ponto de coleta não encontrado.";
+    header("Location: visualizacao_ponto.php");
+    exit;
+}
+
+if ((int) ($pontosColeta['idUsuario'] ?? 0) !== $idUsuarioLogado) {
+    $_SESSION['flash_erro'] = "Você não tem permissão para remover este ponto de coleta.";
+    header("Location: visualizacao_ponto.php");
     exit;
 }
 
@@ -22,7 +36,15 @@ $erro = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
-        delete($pdo, "PontosDeColeta", "id = ?", [$id]);
+        $removidos = delete($pdo, "PontosDeColeta", "id = ? AND idUsuario = ?", [$id, $idUsuarioLogado]);
+
+        if ($removidos > 0) {
+            $_SESSION['flash_sucesso'] = "Ponto de coleta removido com sucesso!";
+            header("Location: visualizacao_ponto.php");
+            exit;
+        }
+
+        $_SESSION['flash_erro'] = "Não foi possível remover este ponto de coleta.";
         header("Location: visualizacao_ponto.php");
         exit;
     } catch (PDOException $e) {

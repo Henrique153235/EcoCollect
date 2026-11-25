@@ -1,11 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/init.php';
 
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login_usuario.php");
+    exit;
+}
+
+$idUsuarioLogado = (int) $_SESSION['usuario_id'];
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id || $id <= 0) {
-    header("Location: visualizacao_ponto.php?erro=id_invalido");
+    $_SESSION['flash_erro'] = "Ponto de coleta inválido.";
+    header("Location: visualizacao_ponto.php");
+    exit;
+}
+
+$pontoColeta = read($pdo, "PontosDeColeta", "id = ?", [$id]);
+
+if (!$pontoColeta) {
+    $_SESSION['flash_erro'] = "Ponto de coleta não encontrado.";
+    header("Location: visualizacao_ponto.php");
+    exit;
+}
+
+if ((int) ($pontoColeta['idUsuario'] ?? 0) !== $idUsuarioLogado) {
+    $_SESSION['flash_erro'] = "Você não tem permissão para editar este ponto de coleta.";
+    header("Location: visualizacao_ponto.php");
     exit;
 }
 
@@ -27,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'status' => in_array($status, ['disponivel', 'indisponivel'], true) ? $status : 'disponivel',
             ];
 
-            update($pdo, "PontosDeColeta", $novoPontoColeta, "id = ?", [$id]);
+            update($pdo, "PontosDeColeta", $novoPontoColeta, "id = ? AND idUsuario = ?", [$id, $idUsuarioLogado]);
             delete($pdo, "PontoMaterial", "idPonto = ?", [$id]);
 
             if (is_array($opcoes)) {
@@ -41,20 +64,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $pdo->commit();
 
+            $_SESSION['flash_sucesso'] = "Ponto de coleta atualizado com sucesso!";
             header("Location: visualizacao_ponto.php");
             exit;
         } catch (Exception $e) {
-            $pdo->rollBack();
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
             $erro = "Erro ao atualizar ponto de coleta: " . $e->getMessage();
         }
     }
-}
-
-$pontoColeta = read($pdo, "PontosDeColeta", "id = ?", [$id]);
-
-if (!$pontoColeta) {
-    header("Location: visualizacao_ponto.php?erro=nao_encontrado");
-    exit;
 }
 
 $materiaisPonto = readAll($pdo, "ViewMateriaisDoPonto", "idPonto = ?", [$id]);

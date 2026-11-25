@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/init.php';
 
+$idUsuarioLogado = isset($_SESSION['usuario_id']) ? (int) $_SESSION['usuario_id'] : null;
+
+$mensagemSucesso = $_SESSION['flash_sucesso'] ?? "";
+$mensagemErro = $_SESSION['flash_erro'] ?? "";
+unset($_SESSION['flash_sucesso'], $_SESSION['flash_erro']);
+
 $listaMateriais = readAll($pdo, "Material");
 
 $statusFiltro = $_GET['status'] ?? '';
 $materialFiltro = $_GET['idMaterial'] ?? '';
 
-$sql = "SELECT DISTINCT p.id, p.cep, p.status, p.materiais 
+$sql = "SELECT DISTINCT p.id, p.idUsuario, p.criador, p.cep, p.status, p.materiais 
         FROM ViewPontosDeColeta p
         LEFT JOIN PontoMaterial pm ON p.id = pm.idPonto
         WHERE 1=1";
@@ -54,8 +60,20 @@ $pontoColeta = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <section class="caixa-pontos">
             <div class="topo-pontos">
                 <h2>Pontos de Coleta Cadastrados</h2>
-                <a href="cadastro_ponto_coleta.php" class="btn-novo">Cadastrar Novo Ponto</a>
+                <?php if ($idUsuarioLogado !== null): ?>
+                    <a href="cadastro_ponto_coleta.php" class="btn-novo">Cadastrar Novo Ponto</a>
+                <?php else: ?>
+                    <a href="login_usuario.php" class="btn-novo">Entrar para Cadastrar Ponto</a>
+                <?php endif; ?>
             </div>
+
+            <?php if (!empty($mensagemSucesso)): ?>
+                <div class="alert alert-success"><?= htmlspecialchars($mensagemSucesso) ?></div>
+            <?php endif; ?>
+
+            <?php if (!empty($mensagemErro)): ?>
+                <div class="alert alert-danger"><?= htmlspecialchars($mensagemErro) ?></div>
+            <?php endif; ?>
 
             <details class="filtro-box" <?= (!empty($statusFiltro) || !empty($materialFiltro)) ? 'open' : '' ?>>
                 <summary>Opções de Filtragem</summary>
@@ -95,6 +113,7 @@ $pontoColeta = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <p class="sem-resultados">Nenhum ponto de coleta encontrado com os filtros selecionados.</p>
                 <?php else: ?>
                     <?php foreach ($pontoColeta as $p): ?>
+                        <?php $ehCriador = ($idUsuarioLogado !== null && (int) ($p['idUsuario'] ?? 0) === $idUsuarioLogado); ?>
                         <article class="card-ponto">
                             <div class="card-header">
                                 <span class="card-id"><strong>Ponto:</strong> #<?= htmlspecialchars((string) $p['id']) ?></span>
@@ -114,9 +133,18 @@ $pontoColeta = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </p>
                             </div>
 
-                            <div class="card-actions">
-                                <a href="edicao_ponto_coleta.php?id=<?= $p['id'] ?>" class="btn-editar">Editar</a>
-                                <a href="remocao_ponto_coleta.php?id=<?= $p['id'] ?>" class="btn-remover">Remover</a>
+                            <div class="card-rodape">
+                                <span class="criador-info">
+                                    Cadastrado por <strong><?= htmlspecialchars($p['criador'] ?? 'Sistema') ?></strong>
+                                    <?= $ehCriador ? ' (Você)' : '' ?>
+                                </span>
+
+                                <?php if ($ehCriador): ?>
+                                    <div class="card-actions">
+                                        <a href="edicao_ponto_coleta.php?id=<?= (int) $p['id'] ?>" class="btn-editar">Editar</a>
+                                        <a href="remocao_ponto_coleta.php?id=<?= (int) $p['id'] ?>" class="btn-remover">Remover</a>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </article>
                     <?php endforeach; ?>
